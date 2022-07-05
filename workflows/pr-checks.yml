@@ -1,0 +1,81 @@
+name: PR checks
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+jobs:
+  build_check:
+    runs-on: ubuntu-latest
+    container:
+      image: node:16.14.2-alpine
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: npm-
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+      - name: Build check
+        run: npm run build
+
+  codestyle:
+    needs: build_check
+    runs-on: ubuntu-latest
+    container:
+      image: node:16.14.2-alpine
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: npm-
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+      - name: Lint source code with Eslint
+        run: npm run check:eslint
+
+  types:
+    needs: build_check
+    runs-on: ubuntu-latest
+    container:
+      image: node:16.14.2-alpine
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: npm-
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+      - name: Check types
+        run: npm run check:ts
+
+  tests:
+    needs: build_check
+    runs-on: ubuntu-latest
+    container:
+      image: node:16.14.2-alpine
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: npm-
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+      - name: Run tests
+        run: npm test
