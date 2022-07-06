@@ -2,10 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Root } from 'pages/Root';
 
+import theme from 'theme';
+import { ThemeProvider } from '@mui/material/styles';
+
+
 const App = () => (
-    <React.StrictMode>
-        <Root />
-    </React.StrictMode>
+    <ThemeProvider theme={theme}>
+        <React.StrictMode>
+            <Root />
+        </React.StrictMode>
+    </ThemeProvider>
 );
 
 ReactDOM.render(<App />, document.getElementById('root'));

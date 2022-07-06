@@ -1,6 +1,7 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme, responsiveFontSizes } from "@mui/material/styles";
+import { Shadows } from "@mui/material/styles/shadows";
 
-const theme = createTheme({
+let theme = createTheme({
     palette: {
         primary: {
             main: '#56CCF2',
@@ -53,6 +54,14 @@ const theme = createTheme({
             fontSize: 14,
         },
     },
+    spacing: 8,
+    shadows: [
+        "none", 
+        "0px 4px 30px rgba(108, 72, 0, 0.2)",
+        ...Array<string>(23).fill('none') ,
+    ] as Shadows,
 });
+
+theme = responsiveFontSizes(theme);
 
 export default theme;
