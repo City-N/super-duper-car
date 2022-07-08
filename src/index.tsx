@@ -1,17 +1,20 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Root } from 'pages/Root';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter as Router } from 'react-router-dom';
 
+import { App as Root } from 'pages/App';
 import theme from 'theme';
 import { ThemeProvider } from '@mui/material/styles';
 
-
 const App = () => (
-    <ThemeProvider theme={theme}>
-        <React.StrictMode>
-            <Root />
-        </React.StrictMode>
-    </ThemeProvider>
+    <React.StrictMode>
+        <Router>
+            <ThemeProvider theme={theme}>
+                <Root />
+            </ThemeProvider>
+        </Router>
+    </React.StrictMode>
 );
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
+root.render(<App />);
