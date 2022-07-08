@@ -1,21 +1,12 @@
-import React, { FC, memo, useCallback } from 'react';
-import { Container, Button } from '@mui/material';
+import React, { FC } from 'react';
+import { Container, Typography } from '@mui/material';
 
-const SignInPage: FC<{}> = memo(() => {
-
-    const handleClick = useCallback(() => console.log('CLICK'), []);
-
+const SignInPage: FC<{}> = () => {
     return (
         <Container>
-            <Button 
-                variant='contained' 
-                sx={{ boxShadow: (theme) => theme.shadows[1] }}
-                onClick={handleClick}
-            >
-                Клик
-            </Button>
+            <Typography variant='h1'>Погнали 🏎</Typography>
         </Container>
     );
-});
+};
 
 export default SignInPage;
