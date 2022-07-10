@@ -1,5 +1,4 @@
 /* eslint-disable camelcase */
-/* eslint-disable @typescript-eslint/ban-types */
 import React, { FC } from 'react';
 import {
     Button,
@@ -28,22 +27,7 @@ interface ISignUp {
     phone: string;
 }
 
-const SignUpPage: FC<{}> = () => {
-    const formik = useFormik({
-        initialValues: {
-            first_name: '',
-            second_name: '',
-            login: '',
-            email: '',
-            password: '',
-            phone: '',
-        },
-        onSubmit: (values: ISignUp, { setSubmitting, resetForm }) => signup(values)
-            .then(() => resetForm())
-            .then(() => setSubmitting(false))
-            .catch(() => setSubmitting(false)),
-    });
-
+const SignUpPage: FC<Record<string, unknown>> = () => {
     const signup = (data: ISignUp): Promise<void> => {
         const currentURL = `${API_URL}/auth/signup`;
 
@@ -58,6 +42,21 @@ const SignUpPage: FC<{}> = () => {
             .then((res: any): Promise<any> => res)
             .catch(err => console.log(err));
     };
+
+    const formik = useFormik({
+        initialValues: {
+            first_name: '',
+            second_name: '',
+            login: '',
+            email: '',
+            password: '',
+            phone: '',
+        },
+        onSubmit: (values: ISignUp, { setSubmitting, resetForm }) => signup(values)
+            .then(() => resetForm())
+            .then(() => setSubmitting(false))
+            .catch(() => setSubmitting(false)),
+    });
 
     return (
         <Box>

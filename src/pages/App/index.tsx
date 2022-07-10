@@ -1,11 +1,10 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import React, { FC } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import SignInPage from 'pages/SignIn';
 import MainPage from 'pages/Main';
 import SignUpPage from 'pages/SignUp';
 
-export const App: FC<{}> = () => {
+export const App: FC<Record<string, unknown>> = () => {
     const isAuthenticated = true;
     return (
         <Switch>

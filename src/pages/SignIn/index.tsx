@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/ban-types */
 import React, { FC, useState } from 'react';
 import {
     Button,
@@ -26,21 +25,10 @@ interface ISignIn {
     password: string;
 }
 
-const SignInPage: FC<{}> = () => {
+const SignInPage: FC<Record<string, unknown>> = () => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const handleClickShowPassword = () => setShowPassword(!showPassword);
     const handleMouseDownPassword = () => setShowPassword(!showPassword);
-
-    const formik = useFormik({
-        initialValues: {
-            login: '',
-            password: '',
-        },
-        onSubmit: (values: ISignIn, { setSubmitting, resetForm }) => login(values)
-            .then(() => resetForm())
-            .then(() => setSubmitting(false))
-            .catch(() => setSubmitting(false)),
-    });
 
     const login = (data: ISignIn): Promise<void> => {
         const currentURL = `${API_URL}/auth/signin`;
@@ -55,6 +43,17 @@ const SignInPage: FC<{}> = () => {
         })
             .then((res: any): Promise<any> => res);
     };
+
+    const formik = useFormik({
+        initialValues: {
+            login: '',
+            password: '',
+        },
+        onSubmit: (values: ISignIn, { setSubmitting, resetForm }) => login(values)
+            .then(() => resetForm())
+            .then(() => setSubmitting(false))
+            .catch(() => setSubmitting(false)),
+    });
 
     return (
         <Box>

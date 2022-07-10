@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import React, { FC } from 'react';
 import ReactDOM from 'react-dom/client';
 // import { Provider } from 'react-redux'
@@ -19,7 +18,7 @@ import colors from 'colors';
 // export type RootState = ReturnType<typeof store.getState>;
 // export type AppDispatch = typeof store.dispatch;
 
-const App: FC<{}> = () => (
+const App: FC<Record<string, unknown>> = () => (
     <React.StrictMode>
         <Router>
             {/* <Provider store={store}> */}
