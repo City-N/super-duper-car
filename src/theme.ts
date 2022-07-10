@@ -1,3 +1,4 @@
+/* eslint-disable import/no-mutable-exports */
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 import { Shadows } from '@mui/material/styles/shadows';
 import colors from 'colors';

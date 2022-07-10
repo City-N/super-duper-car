@@ -128,7 +128,10 @@ const SignInPage: FC<{}> = () => {
                                                     onClick={handleClickShowPassword}
                                                     onMouseDown={handleMouseDownPassword}
                                                 >
-                                                    {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                                                    {showPassword
+                                                        ? <VisibilityIcon />
+                                                        : <VisibilityOffIcon />
+                                                    }
                                                 </IconButton>
                                             </InputAdornment>
                                         ),
