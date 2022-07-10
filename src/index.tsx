@@ -8,6 +8,8 @@ import { App as Root } from 'pages/App';
 import theme from 'theme';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { Container } from '@mui/material';
+import colors from 'colors';
 
 // Потом настроим
 // const store = configureStore({
@@ -23,7 +25,17 @@ const App: FC<{}> = () => (
             {/* <Provider store={store}> */}
             <ThemeProvider theme={theme}>
                 <CssBaseline />
-                <Root />
+                <Container
+                    sx={{
+                        minWidth: '320px',
+                        height: '100%',
+                        minHeight: 'calc(100vh)',
+                        backgroundColor: colors.main,
+                        maxWidth: 'none',
+                    }}
+                >
+                    <Root />
+                </Container>
             </ThemeProvider>
             {/* </Provider> */}
         </Router>

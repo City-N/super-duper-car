@@ -1,5 +1,6 @@
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 import { Shadows } from "@mui/material/styles/shadows";
+import colors from "colors";
 
 let theme = createTheme({
     palette: {
@@ -73,6 +74,15 @@ let theme = createTheme({
         "0px 4px 30px rgba(108, 72, 0, 0.2)",
         ...Array<string>(23).fill('none'),
     ] as Shadows,
+    components: {
+        MuiCssBaseline: {
+            styleOverrides: {
+                body: {
+                    backgroundColor: colors.main,
+                },
+            },
+        },
+    },
 });
 
 theme = responsiveFontSizes(theme);
