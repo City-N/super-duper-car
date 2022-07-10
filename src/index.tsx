@@ -31,7 +31,8 @@ const App: FC<{}> = () => (
                         height: '100%',
                         minHeight: 'calc(100vh)',
                         backgroundColor: colors.main,
-                        maxWidth: 'none',
+                        maxWidth: 'none !important',
+                        padding: '0 !important',
                     }}
                 >
                     <Root />

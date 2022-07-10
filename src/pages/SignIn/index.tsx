@@ -42,7 +42,7 @@ const SignInPage: FC<{}> = () => {
     });
 
 
-    const login = async (data: ISignIn): Promise<void> => {
+    const login = (data: ISignIn): Promise<void> => {
         const currentURL = `${API_URL}/auth/signin`;
 
         return fetch(currentURL, {
@@ -98,7 +98,6 @@ const SignInPage: FC<{}> = () => {
                                         width: '100%',
                                     }}
                                     inputProps={{
-                                        autocomplete: 'new-password',
                                         form: {
                                             autocomplete: 'off',
                                         },

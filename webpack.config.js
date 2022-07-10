@@ -97,7 +97,7 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             template: './public/index.html',
-            favicon: 'src/media/logo_small.svg',
+            favicon: 'src/img/logo_small.svg',
             scriptLoading: 'defer',
         }),
     ],
