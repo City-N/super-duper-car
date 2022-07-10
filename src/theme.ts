@@ -40,6 +40,7 @@ let theme = createTheme({
         fontSize: 17,
         h1: {
             fontSize: 46,
+            fontWeight: 700,
         },
         h2: {
             fontSize: 24,
@@ -53,12 +54,24 @@ let theme = createTheme({
         caption: {
             fontSize: 14,
         },
+        fontFamily: [
+            '-apple-system',
+            'BlinkMacSystemFont',
+            '"Segoe UI"',
+            'Roboto',
+            '"Helvetica Neue"',
+            'Arial',
+            'sans-serif',
+            '"Apple Color Emoji"',
+            '"Segoe UI Emoji"',
+            '"Segoe UI Symbol"',
+        ].join(','),
     },
     spacing: 8,
     shadows: [
-        "none", 
+        "none",
         "0px 4px 30px rgba(108, 72, 0, 0.2)",
-        ...Array<string>(23).fill('none') ,
+        ...Array<string>(23).fill('none'),
     ] as Shadows,
 });
 
