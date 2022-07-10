@@ -1,9 +1,9 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import React, { FC } from 'react';
 import ReactDOM from 'react-dom/client';
 // import { Provider } from 'react-redux'
 // import { configureStore } from '@reduxjs/toolkit'
 import { BrowserRouter as Router } from 'react-router-dom';
-
 import { App as Root } from 'pages/App';
 import theme from 'theme';
 import { ThemeProvider } from '@mui/material/styles';

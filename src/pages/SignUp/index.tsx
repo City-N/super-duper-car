@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+/* eslint-disable @typescript-eslint/ban-types */
 import React, { FC } from 'react';
 import {
     Button,

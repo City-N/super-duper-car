@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/ban-types */
 import React, { FC, useState } from 'react';
 import {
     Button,
@@ -51,11 +53,7 @@ const SignInPage: FC<{}> = () => {
             },
             body: JSON.stringify(data),
         })
-            .then((res: any): Promise<any> => res)
-            // .then((payload) => setFormData({
-            //     statusCode: payload.status,
-            // }))
-            .catch(err => console.log(err));
+            .then((res: any): Promise<any> => res);
     };
 
     return (

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import React, { FC } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import SignInPage from 'pages/SignIn';
