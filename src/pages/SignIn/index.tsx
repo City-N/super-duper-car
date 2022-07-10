@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import {
     Button,
     Card,
@@ -8,8 +8,12 @@ import {
     Typography,
     Box,
     Grid,
-    Link
+    Link,
+    InputAdornment,
+    IconButton,
 } from '@mui/material';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import { API_URL } from '../../constants';
 import { useFormik } from 'formik';
 import colors from 'colors';
@@ -21,6 +25,10 @@ interface ISignIn {
 }
 
 const SignInPage: FC<{}> = () => {
+    const [showPassword, setShowPassword] = useState<boolean>(false);
+    const handleClickShowPassword = () => setShowPassword(!showPassword);
+    const handleMouseDownPassword = () => setShowPassword(!showPassword);
+
     const formik = useFormik({
         initialValues: {
             login: '',
@@ -102,7 +110,7 @@ const SignInPage: FC<{}> = () => {
                                     label="Пароль"
                                     name="password"
                                     variant="outlined"
-                                    type="password"
+                                    type={showPassword ? "text" : "password"}
                                     value={formik.values.password}
                                     onChange={formik.handleChange}
                                     sx={{
@@ -113,11 +121,25 @@ const SignInPage: FC<{}> = () => {
                                         form: {
                                             autocomplete: 'off',
                                         },
+
+                                    }}
+                                    InputProps={{
+                                        endAdornment: (
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={handleClickShowPassword}
+                                                    onMouseDown={handleMouseDownPassword}
+                                                >
+                                                    {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        )
                                     }}
                                     helperText={
-                                        <Link 
-                                            to="/sign_up" 
-                                            underline="none" 
+                                        <Link
+                                            to="/sign_up"
+                                            underline="none"
                                             component={RouterLink}
                                         >
                                             <Typography variant='caption' color={colors.main}>
@@ -137,6 +159,8 @@ const SignInPage: FC<{}> = () => {
                                     type="submit"
                                     color="primary"
                                     disabled={formik.isSubmitting}
+                                    size="large"
+                                    fullWidth
                                     sx={{
                                         borderRadius: '8px',
                                     }}
