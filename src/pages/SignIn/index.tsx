@@ -8,10 +8,12 @@ import {
     Typography,
     Box,
     Grid,
+    Link
 } from '@mui/material';
 import { API_URL } from '../../constants';
 import { useFormik } from 'formik';
 import colors from 'colors';
+import { Link as RouterLink } from 'react-router-dom';
 
 interface ISignIn {
     login: string;
@@ -112,6 +114,17 @@ const SignInPage: FC<{}> = () => {
                                             autocomplete: 'off',
                                         },
                                     }}
+                                    helperText={
+                                        <Link 
+                                            to="/sign_up" 
+                                            underline="none" 
+                                            component={RouterLink}
+                                        >
+                                            <Typography variant='caption' color={colors.main}>
+                                                У вас нет аккаунта ? Давайте зарегестрируемся!
+                                            </Typography>
+                                        </Link>
+                                    }
                                 />
                             </CardContent>
                             <CardActions

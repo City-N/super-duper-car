@@ -1,6 +1,8 @@
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 import { Shadows } from "@mui/material/styles/shadows";
+import { LinkProps } from '@mui/material/Link';
 import colors from "colors";
+
 
 let theme = createTheme({
     palette: {
