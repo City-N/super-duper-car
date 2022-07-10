@@ -79,12 +79,19 @@ const SignInPage: FC<{}> = () => {
                                     id="login"
                                     label="Логин"
                                     name="login"
+                                    autoFocus
                                     variant="outlined"
                                     value={formik.values.login}
                                     onChange={formik.handleChange}
                                     sx={{
                                         paddingBottom: '16px',
                                         width: '100%',
+                                    }}
+                                    inputProps={{
+                                        autocomplete: 'new-password',
+                                        form: {
+                                            autocomplete: 'off',
+                                        },
                                     }}
                                 />
 
@@ -98,6 +105,12 @@ const SignInPage: FC<{}> = () => {
                                     onChange={formik.handleChange}
                                     sx={{
                                         width: '100%',
+                                    }}
+                                    inputProps={{
+                                        autocomplete: 'new-password',
+                                        form: {
+                                            autocomplete: 'off',
+                                        },
                                     }}
                                 />
                             </CardContent>
