@@ -94,7 +94,7 @@ const SignInPage: FC<Record<string, unknown>> = () => {
                                     }}
                                     inputProps={{
                                         form: {
-                                            autocomplete: 'off',
+                                            autoComplete: 'off',
                                         },
                                     }}
                                 />
@@ -111,9 +111,9 @@ const SignInPage: FC<Record<string, unknown>> = () => {
                                         width: '100%',
                                     }}
                                     inputProps={{
-                                        autocomplete: 'new-password',
+                                        autoComplete: 'new-password',
                                         form: {
-                                            autocomplete: 'off',
+                                            autoComplete: 'off',
                                         },
 
                                     }}
@@ -167,7 +167,7 @@ const SignInPage: FC<Record<string, unknown>> = () => {
                                         color={colors.white}
                                         fontWeight='bold'
                                     >
-                                        Войти
+                                        Войти 🦾
                                     </Typography>
                                 </Button>
                             </CardActions>
