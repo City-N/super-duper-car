@@ -14,10 +14,10 @@ import {
 } from '@mui/material';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { API_URL } from '../../constants';
 import { useFormik } from 'formik';
 import colors from 'colors';
 import { Link as RouterLink } from 'react-router-dom';
+import { API_URL } from '../../constants';
 
 interface ISignIn {
     login: string;
@@ -34,13 +34,11 @@ const SignInPage: FC<{}> = () => {
             login: '',
             password: '',
         },
-        onSubmit: (values: ISignIn, { setSubmitting, resetForm }) =>
-            login(values)
-                .then(() => resetForm())
-                .then(() => setSubmitting(false))
-                .catch(() => setSubmitting(false)),
+        onSubmit: (values: ISignIn, { setSubmitting, resetForm }) => login(values)
+            .then(() => resetForm())
+            .then(() => setSubmitting(false))
+            .catch(() => setSubmitting(false)),
     });
-
 
     const login = (data: ISignIn): Promise<void> => {
         const currentURL = `${API_URL}/auth/signin`;
@@ -109,7 +107,7 @@ const SignInPage: FC<{}> = () => {
                                     label="Пароль"
                                     name="password"
                                     variant="outlined"
-                                    type={showPassword ? "text" : "password"}
+                                    type={showPassword ? 'text' : 'password'}
                                     value={formik.values.password}
                                     onChange={formik.handleChange}
                                     sx={{
@@ -133,7 +131,7 @@ const SignInPage: FC<{}> = () => {
                                                     {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
                                                 </IconButton>
                                             </InputAdornment>
-                                        )
+                                        ),
                                     }}
                                     helperText={
                                         <Link

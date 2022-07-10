@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import {
     Button,
     Card,
@@ -10,12 +10,12 @@ import {
     Grid,
     Link,
 } from '@mui/material';
-import { API_URL } from '../../constants';
 import { useFormik } from 'formik';
 import colors from 'colors';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link as RouterLink } from 'react-router-dom';
 import theme from 'theme';
+import { API_URL } from '../../constants';
 
 interface ISignUp {
     first_name: string;
@@ -27,7 +27,6 @@ interface ISignUp {
 }
 
 const SignUpPage: FC<{}> = () => {
-
     const formik = useFormik({
         initialValues: {
             first_name: '',
@@ -37,11 +36,10 @@ const SignUpPage: FC<{}> = () => {
             password: '',
             phone: '',
         },
-        onSubmit: (values: ISignUp, { setSubmitting, resetForm }) =>
-            signup(values)
-                .then(() => resetForm())
-                .then(() => setSubmitting(false))
-                .catch(() => setSubmitting(false)),
+        onSubmit: (values: ISignUp, { setSubmitting, resetForm }) => signup(values)
+            .then(() => resetForm())
+            .then(() => setSubmitting(false))
+            .catch(() => setSubmitting(false)),
     });
 
     const signup = (data: ISignUp): Promise<void> => {
@@ -218,8 +216,8 @@ const SignUpPage: FC<{}> = () => {
                                     </Grid>
                                     <Grid container item xs={12}>
                                         <Grid item>
-                                            <ArrowBackIcon 
-                                                color='primary' 
+                                            <ArrowBackIcon
+                                                color='primary'
                                                 sx={{
                                                     paddingRight: theme.spacing(1),
                                                 }}
