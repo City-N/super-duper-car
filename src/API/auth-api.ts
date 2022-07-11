@@ -1,18 +1,5 @@
-// eslint-disable-next-line quotes
-import axios from "axios";
+import axios, { AxiosResponse } from 'axios';
 import { SIGNIN_URL, SIGNUP_URL } from 'constants/constants';
-
-interface IResponse {
-    body: { locked: boolean; };
-    bodyUsed: boolean;
-    headers: unknown[];
-    ok: boolean;
-    redirected: false
-    status: number;
-    statusText: string;
-    type: string;
-    url: string;
-}
 
 interface ISignIn {
     login: string;
@@ -30,12 +17,10 @@ interface ISignUp {
     phone: string;
 }
 
-const login = (data: ISignIn) => axios.post<IResponse, Promise<IResponse>>(SIGNIN_URL, data)
-    .then(res => res);
+const login = (data: ISignIn) => axios.post<AxiosResponse>(SIGNIN_URL, data);
 
-const signup = (data: ISignUp) => axios.post<IResponse, Promise<IResponse>>(SIGNUP_URL, data)
-    .then(res => res);
+const signup = (data: ISignUp) => axios.post<AxiosResponse>(SIGNUP_URL, data);
 
 export {
-    login, signup, ISignIn, ISignUp, IResponse,
+    login, signup, ISignIn, ISignUp,
 };
