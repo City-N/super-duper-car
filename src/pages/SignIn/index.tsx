@@ -17,7 +17,8 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useFormik } from 'formik';
 import colors from 'colors';
 import { Link as RouterLink } from 'react-router-dom';
-import type { ISignIn, login } from 'API/auth-api';
+import type { ISignIn } from 'API/auth-api';
+import { login } from 'API/auth-api';
 
 const SignInPage = () => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
