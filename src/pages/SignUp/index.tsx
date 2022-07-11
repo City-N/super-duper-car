@@ -15,7 +15,7 @@ import colors from 'colors';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link as RouterLink } from 'react-router-dom';
 import theme from 'theme';
-import { ISignUp, signup } from 'API/auth-api';
+import type { ISignUp, signup } from 'API/auth-api';
 
 const SignUpPage = () => {
     const formik = useFormik({
