@@ -3,6 +3,9 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const isDevelopment = process.env.NODE_ENV === 'development';
+const isProduction = process.env.NODE_ENV === 'production';
+
 module.exports = {
     mode: 'development',
     entry: './src/index.tsx',
@@ -11,8 +14,9 @@ module.exports = {
         static: {
             directory: path.resolve(__dirname, 'build'),
         },
-        port: 8080,
+        port: 3000,
         hot: true,
+        historyApiFallback: true,
         compress: true,
         client: {
             overlay: true,
@@ -93,6 +97,8 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             template: './public/index.html',
+            favicon: 'src/img/logo_small.svg',
+            scriptLoading: 'defer',
         }),
     ],
     output: {
