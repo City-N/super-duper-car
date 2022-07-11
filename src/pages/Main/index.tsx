@@ -1,8 +1,8 @@
-import React, { FC, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 
-const MainPage: FC<Record<string, unknown>> = () => {
+const MainPage = () => {
     const handleClick = useCallback(() => console.log('CLICK'), []);
     return (
         <Button

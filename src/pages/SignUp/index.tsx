@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable camelcase */
-import React, { FC } from 'react';
+import React from 'react';
 import {
     Button,
     Card,
@@ -17,33 +15,9 @@ import colors from 'colors';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link as RouterLink } from 'react-router-dom';
 import theme from 'theme';
-import { API_URL } from '../../constants';
+import { ISignUp, signup } from 'API/auth-api';
 
-interface ISignUp {
-    first_name: string;
-    second_name: string;
-    login: string;
-    email: string;
-    password: string;
-    phone: string;
-}
-
-const SignUpPage: FC<Record<string, unknown>> = () => {
-    const signup = (data: ISignUp): Promise<void> => {
-        const currentURL = `${API_URL}/auth/signup`;
-
-        return fetch(currentURL, {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-            .then((res: any): Promise<any> => res)
-            .catch(err => console.log(err));
-    };
-
+const SignUpPage = () => {
     const formik = useFormik({
         initialValues: {
             first_name: '',

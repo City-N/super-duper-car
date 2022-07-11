@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
 import {
     Button,
     Card,
@@ -18,31 +18,12 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useFormik } from 'formik';
 import colors from 'colors';
 import { Link as RouterLink } from 'react-router-dom';
-import { API_URL } from '../../constants';
+import { ISignIn, login } from 'API/auth-api';
 
-interface ISignIn {
-    login: string;
-    password: string;
-}
-
-const SignInPage: FC<Record<string, unknown>> = () => {
+const SignInPage = () => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const handleClickShowPassword = () => setShowPassword(!showPassword);
     const handleMouseDownPassword = () => setShowPassword(!showPassword);
-
-    const login = (data: ISignIn): Promise<void> => {
-        const currentURL = `${API_URL}/auth/signin`;
-
-        return fetch(currentURL, {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-            .then((res: any): Promise<any> => res);
-    };
 
     const formik = useFormik({
         initialValues: {

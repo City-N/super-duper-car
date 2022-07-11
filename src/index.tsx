@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 // import { Provider } from 'react-redux'
 // import { configureStore } from '@reduxjs/toolkit'
@@ -18,7 +18,7 @@ import colors from 'colors';
 // export type RootState = ReturnType<typeof store.getState>;
 // export type AppDispatch = typeof store.dispatch;
 
-const App: FC<Record<string, unknown>> = () => (
+const App = () => (
     <React.StrictMode>
         <Router>
             {/* <Provider store={store}> */}

@@ -1,11 +1,11 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import SignInPage from 'pages/SignIn';
 import MainPage from 'pages/Main';
 import SignUpPage from 'pages/SignUp';
 
-export const App: FC<Record<string, unknown>> = () => {
-    const isAuthenticated = true;
+export const App = () => {
+    const isAuthenticated = false;
     return (
         <Switch>
             <Route
