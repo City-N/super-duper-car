@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-// import { Provider } from 'react-redux'
-// import { configureStore } from '@reduxjs/toolkit'
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { App as Root } from 'pages/App';
 import theme from 'theme';
@@ -11,33 +11,33 @@ import { Container } from '@mui/material';
 import colors from 'colors';
 
 // Потом настроим
-// const store = configureStore({
-//     reducer: {},
-// });
+const store = configureStore({
+    reducer: {},
+});
 
-// export type RootState = ReturnType<typeof store.getState>;
-// export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 
 const App = () => (
     <React.StrictMode>
         <Router>
-            {/* <Provider store={store}> */}
-            <ThemeProvider theme={theme}>
-                <CssBaseline />
-                <Container
-                    sx={{
-                        minWidth: '320px',
-                        height: '100%',
-                        minHeight: 'calc(100vh)',
-                        backgroundColor: colors.main,
-                        maxWidth: 'none !important',
-                        padding: '0 !important',
-                    }}
-                >
-                    <Root />
-                </Container>
-            </ThemeProvider>
-            {/* </Provider> */}
+            <Provider store={store}>
+                <ThemeProvider theme={theme}>
+                    <CssBaseline />
+                    <Container
+                        sx={{
+                            minWidth: '320px',
+                            height: '100%',
+                            minHeight: 'calc(100vh)',
+                            backgroundColor: colors.main,
+                            maxWidth: 'none !important',
+                            padding: '0 !important',
+                        }}
+                    >
+                        <Root />
+                    </Container>
+                </ThemeProvider>
+            </Provider>
         </Router>
     </React.StrictMode>
 );
