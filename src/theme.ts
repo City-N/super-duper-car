@@ -12,7 +12,7 @@ const theme = responsiveFontSizes(
                 contrastText: '',
             },
             secondary: {
-                main: '#F587A4',
+                main: '#FFFFFF',
                 light: '',
                 dark: '',
                 contrastText: '',

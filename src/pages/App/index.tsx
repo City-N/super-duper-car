@@ -3,9 +3,10 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import SignInPage from 'pages/SignIn';
 import MainPage from 'pages/Main';
 import SignUpPage from 'pages/SignUp';
+import ForumPage from 'pages/Forum';
 
 export const App = () => {
-    const isAuthenticated = false;
+    const isAuthenticated = true;
     return (
         <Switch>
             <Route
@@ -15,6 +16,7 @@ export const App = () => {
             />
             <Route exact path="/sign_in" component={SignInPage} />
             <Route exact path="/sign_up" component={SignUpPage} />
+            <Route exact path="/forum" component={ForumPage} />
         </Switch>
     );
 };
