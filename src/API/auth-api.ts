@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { SIGNIN_URL, SIGNUP_URL } from 'constants/constants';
+import { SIGNIN_URL, SIGNUP_URL, GET_USER_URL } from 'constants/constants';
 
 interface ISignIn {
     login: string;
@@ -17,10 +17,19 @@ interface ISignUp {
     phone: string;
 }
 
+interface IUser extends ISignUp {
+    id: number;
+    // eslint-disable-next-line camelcase
+    display_name: string;
+    avatar: string;
+}
+
 const login = (data: ISignIn) => axios.post<AxiosResponse>(SIGNIN_URL, data);
 
 const signup = (data: ISignUp) => axios.post<AxiosResponse>(SIGNUP_URL, data);
 
+const getUser = () => axios.get<AxiosResponse>(GET_USER_URL);
+
 export {
-    login, signup, ISignIn, ISignUp,
+    login, signup, getUser, ISignIn, ISignUp, IUser,
 };

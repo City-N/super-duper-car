@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Button,
     Card,
@@ -18,22 +18,36 @@ import { useFormik } from 'formik';
 import colors from 'colors';
 import { Link as RouterLink } from 'react-router-dom';
 import type { ISignIn } from 'API/auth-api';
-import { login } from 'API/auth-api';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserDataAsync, loginUserAsync, showUserData } from 'reducers/getLoginStatus';
 
 const SignInPage = () => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const handleClickShowPassword = () => setShowPassword(!showPassword);
     const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
+    const [userData, setUserData] = useState({});
+    const dispatch = useDispatch();
+
+    const loginDisp = value => dispatch(loginUserAsync(value));
+
+    const testRedux = useSelector(showUserData);
+    console.log(testRedux);
+    console.log(userData);
+
     const formik = useFormik({
         initialValues: {
             login: '',
             password: '',
         },
-        onSubmit: (values: ISignIn, { setSubmitting, resetForm }) => login(values)
-            .then(() => resetForm())
-            .then(() => setSubmitting(false))
-            .catch(() => setSubmitting(false)),
+        onSubmit: (values: ISignIn, { setSubmitting, resetForm }) =>
+            // eslint-disable-next-line implicit-arrow-linebreak
+            loginDisp(values)
+                .then(() => resetForm())
+                .then(() => setSubmitting(false))
+                .then(() => dispatch(getUserDataAsync()))
+                .then(() => setUserData({ testRedux }))
+                .catch(() => setSubmitting(false)),
     });
 
     return (

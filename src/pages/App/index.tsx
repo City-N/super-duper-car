@@ -21,7 +21,7 @@ function ErrorFallback({ error }: TProps) {
 }
 
 export const App = () => {
-    const isAuthenticated = false;
+    const isAuthenticated = true;
     return (
         <ErrorBoundary
             FallbackComponent={ErrorFallback}
