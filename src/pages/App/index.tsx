@@ -4,6 +4,7 @@ import SignInPage from 'pages/SignIn';
 import MainPage from 'pages/Main';
 import SignUpPage from 'pages/SignUp';
 import ForumPage from 'pages/Forum';
+import LeaderTablePage from 'pages/LeaderTable';
 
 export const App = () => {
     const isAuthenticated = true;
@@ -16,7 +17,8 @@ export const App = () => {
             />
             <Route exact path="/sign_in" component={SignInPage} />
             <Route exact path="/sign_up" component={SignUpPage} />
-            <Route exact path="/leaders" component={ForumPage} />
+            <Route exact path="/leaders" component={LeaderTablePage} />
+            <Route exact path="/forum" component={ForumPage} />
         </Switch>
     );
 };

@@ -1,14 +1,14 @@
 import React from 'react';
 import ButtonBack from 'components/button-back';
 import PageTitle from 'components/page-title';
-import Forum from 'components/forum';
+import LeaderTable from 'components/leader-table';
 import { Box } from '@mui/material';
 
 const SignUpPage = () => (
     <Box sx={{ p: 4 }}>
         <ButtonBack color="secondary" />
-        <PageTitle title="Форумы 💻" />
-        <Forum />
+        <PageTitle title="Наши лидеры 🏆" />
+        <LeaderTable />
     </Box>
 );
 
