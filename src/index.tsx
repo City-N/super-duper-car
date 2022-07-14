@@ -8,7 +8,9 @@ import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Container } from '@mui/material';
 import colors from 'colors';
-import { store } from 'store';
+import { setupStore } from 'store/store';
+
+const store = setupStore();
 
 const App = () => (
     <React.StrictMode>

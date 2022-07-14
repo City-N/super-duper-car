@@ -18,8 +18,8 @@ import { useFormik } from 'formik';
 import colors from 'colors';
 import { Link as RouterLink } from 'react-router-dom';
 import type { ISignIn } from 'API/auth-api';
-import { useDispatch, useSelector } from 'react-redux';
-import { getUserDataAsync, loginUserAsync, showUserData } from 'reducers/getLoginStatus';
+import { useAppDispatch, useAppSelector } from 'hooks/redux';
+import { getUserDataAsync, loginUserAsync, showUserData } from 'store/reducers/getLoginStatus';
 
 const SignInPage = () => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -27,13 +27,10 @@ const SignInPage = () => {
     const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
     const [userData, setUserData] = useState({});
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
+    const login = useAppSelector(showUserData);
 
-    const loginDisp = value => dispatch(loginUserAsync(value));
-
-    const login = useSelector(showUserData);
-    // console.log(login);
-    // console.log(userData);
+    const loginDisp = (value: ISignIn) => dispatch(loginUserAsync(value));
 
     const formik = useFormik({
         initialValues: {
@@ -43,10 +40,10 @@ const SignInPage = () => {
         onSubmit: (values: ISignIn, { setSubmitting, resetForm }) =>
             // eslint-disable-next-line implicit-arrow-linebreak
             loginDisp(values)
-                .then(() => dispatch(getUserDataAsync()))
-                .then(() => setUserData({ ...userData, login }))
                 .then(() => resetForm())
                 .then(() => setSubmitting(false))
+                .then(() => dispatch(getUserDataAsync()))
+                .then(() => setUserData({ ...userData, login }))
                 .catch(() => setSubmitting(false)),
     });
 

@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import { SIGNIN_URL, SIGNUP_URL, GET_USER_URL } from 'constants/constants';
 
 interface ISignIn {
@@ -24,11 +24,11 @@ interface IUser extends ISignUp {
     avatar: string;
 }
 
-const login = (data: ISignIn) => axios.post<AxiosResponse>(SIGNIN_URL, data);
+const login = <T>(data: T) => axios.post<string>(SIGNIN_URL, data);
 
-const signup = (data: ISignUp) => axios.post<AxiosResponse>(SIGNUP_URL, data);
+const signup = <T>(data: T) => axios.post<Record<string, number>>(SIGNUP_URL, data);
 
-const getUser = () => axios.get<AxiosResponse>(GET_USER_URL);
+const getUser = <T>() => axios.get<T>(GET_USER_URL);
 
 export {
     login, signup, getUser, ISignIn, ISignUp, IUser,
