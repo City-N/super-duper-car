@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { SIGNIN_URL, SIGNUP_URL, GET_USER_URL } from 'constants/constants';
+import {
+    SIGNIN_URL, LOGOUT_URL, SIGNUP_URL, GET_USER_URL,
+} from 'constants/constants';
 
 interface ISignIn {
     login: string;
@@ -26,14 +28,16 @@ interface IUser extends ISignUp {
 
 const login = <T>(data: T) => axios.post<string>(SIGNIN_URL, data, { withCredentials: true });
 
+const logout = () => axios.post(LOGOUT_URL, { withCredentials: true });
+
 const signup = <T>(data: T) => axios.post<Record<string, number>>(
     SIGNUP_URL,
     data,
     { withCredentials: true },
 );
 
-const getUser = <T>() => axios.get<T>(GET_USER_URL, { withCredentials: true });
+const getUser = () => axios.get(GET_USER_URL, { withCredentials: true });
 
 export {
-    login, signup, getUser, ISignIn, ISignUp, IUser,
+    login, logout, signup, getUser, ISignIn, ISignUp, IUser,
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
     Button,
     Card,
@@ -18,21 +18,16 @@ import { useFormik } from 'formik';
 import colors from 'colors';
 import { Link as RouterLink } from 'react-router-dom';
 import type { ISignIn } from 'API/auth-api';
-import { useAppDispatch, useAppSelector } from 'hooks/redux';
-import { loginUserAsync, showLoginData } from 'store/reducers/getLoginStatus';
-import fetchUser, { showUserData } from 'store/reducers/GetUserSlice';
+import { useAppDispatch } from 'hooks/redux';
+import { loginUserAsync } from 'store/reducers/getLoginStatus';
+import fetchUser from 'store/reducers/GetUserSlice';
 
 const SignInPage = () => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const handleClickShowPassword = () => setShowPassword(!showPassword);
     const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
-    // const [userData, setUserData] = useState({});
     const dispatch = useAppDispatch();
-    const login = useAppSelector(showLoginData);
-    const user = useAppSelector(showUserData);
-    // console.log(user);
-    // console.log(login);
 
     const loginDisp = (value: ISignIn) => dispatch(loginUserAsync(value));
 

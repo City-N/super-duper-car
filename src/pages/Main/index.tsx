@@ -1,13 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
+import { logout } from 'API/auth-api';
 
 const MainPage = () => (
     <Button
         variant='contained'
         sx={{ boxShadow: theme => theme.shadows[1] }}
+        onClick={() => logout()}
     >
-        <Link to='/sign_in'>Войти</Link>
+        Выйти
     </Button>
 );
 
