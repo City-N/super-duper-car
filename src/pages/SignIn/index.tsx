@@ -19,16 +19,20 @@ import colors from 'colors';
 import { Link as RouterLink } from 'react-router-dom';
 import type { ISignIn } from 'API/auth-api';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
-import { getUserDataAsync, loginUserAsync, showUserData } from 'store/reducers/getLoginStatus';
+import { loginUserAsync, showLoginData } from 'store/reducers/getLoginStatus';
+import fetchUser, { showUserData } from 'store/reducers/GetUserSlice';
 
 const SignInPage = () => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const handleClickShowPassword = () => setShowPassword(!showPassword);
     const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
-    const [userData, setUserData] = useState({});
+    // const [userData, setUserData] = useState({});
     const dispatch = useAppDispatch();
-    const login = useAppSelector(showUserData);
+    const login = useAppSelector(showLoginData);
+    const user = useAppSelector(showUserData);
+    // console.log(user);
+    // console.log(login);
 
     const loginDisp = (value: ISignIn) => dispatch(loginUserAsync(value));
 
@@ -37,14 +41,11 @@ const SignInPage = () => {
             login: '',
             password: '',
         },
-        onSubmit: (values: ISignIn, { setSubmitting, resetForm }) =>
-            // eslint-disable-next-line implicit-arrow-linebreak
-            loginDisp(values)
-                .then(() => resetForm())
-                .then(() => setSubmitting(false))
-                .then(() => dispatch(getUserDataAsync()))
-                .then(() => setUserData({ ...userData, login }))
-                .catch(() => setSubmitting(false)),
+        onSubmit: (values: ISignIn, { setSubmitting, resetForm }) => loginDisp(values)
+            .then(() => resetForm())
+            .then(() => setSubmitting(false))
+            .then(() => dispatch(fetchUser()))
+            .catch(() => setSubmitting(false)),
     });
 
     return (

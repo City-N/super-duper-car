@@ -24,11 +24,15 @@ interface IUser extends ISignUp {
     avatar: string;
 }
 
-const login = <T>(data: T) => axios.post<string>(SIGNIN_URL, data);
+const login = <T>(data: T) => axios.post<string>(SIGNIN_URL, data, { withCredentials: true });
 
-const signup = <T>(data: T) => axios.post<Record<string, number>>(SIGNUP_URL, data);
+const signup = <T>(data: T) => axios.post<Record<string, number>>(
+    SIGNUP_URL,
+    data,
+    { withCredentials: true },
+);
 
-const getUser = <T>() => axios.get<T>(GET_USER_URL);
+const getUser = <T>() => axios.get<T>(GET_USER_URL, { withCredentials: true });
 
 export {
     login, signup, getUser, ISignIn, ISignUp, IUser,

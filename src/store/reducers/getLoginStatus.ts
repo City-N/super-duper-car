@@ -1,19 +1,19 @@
-import { STAGES, SUBJECT_TYPES } from 'constants/constants';
+/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { IUser, ISignIn } from 'API/auth-api';
-import { login, getUser } from 'API/auth-api';
 import { AppDispatch, RootState } from 'store/store';
+import type { ISignIn } from 'API/auth-api';
+import { login } from 'API/auth-api';
 
-export interface LoginState {
+export interface ILoginState {
     isLoading: boolean;
-    data: string | IUser | null;
+    statusLogin: string;
     error: string;
 }
 
-const initialState: LoginState = {
+const initialState: ILoginState = {
     isLoading: false,
-    data: null,
+    statusLogin: '',
     error: '',
 };
 
@@ -21,36 +21,32 @@ export const loginSlice = createSlice({
     name: 'login',
     initialState,
     reducers: {
-        addUserData: (state, action: PayloadAction<string>) => {
-            // eslint-disable-next-line no-param-reassign
-            state.data = action.payload;
+        loginFetching: state => {
+            state.isLoading = true;
         },
-        getUserData: (state, action: PayloadAction<IUser>) => {
-            // eslint-disable-next-line no-param-reassign
-            state.data = { ...action.payload };
+        loginFetchingSuccess: (state, action: PayloadAction<string>) => {
+            state.isLoading = false;
+            state.statusLogin = action.payload;
+            state.error = '';
+        },
+        loginFetchingError: (state, action: PayloadAction<string>) => {
+            state.isLoading = false;
+            state.error = action.payload;
         },
     },
 });
 
-const { getUserData, addUserData } = loginSlice.actions;
-
-export const getUserDataAsync = () => async (dispatch: AppDispatch) => {
-    try {
-        const response = await getUser<IUser>();
-        dispatch(getUserData(response.data));
-    } catch (error) {
-        throw new Error(error.message);
-    }
-};
+const { loginFetching, loginFetchingSuccess, loginFetchingError } = loginSlice.actions;
 
 export const loginUserAsync = (data: ISignIn) => async (dispatch: AppDispatch) => {
     try {
+        dispatch(loginFetching());
         const response = await login<ISignIn>(data);
-        dispatch(addUserData(response.data));
+        dispatch(loginFetchingSuccess(response.data));
     } catch (error) {
-        throw new Error(error.message);
+        dispatch(loginFetchingError((error as Error).message));
     }
 };
 
-export const showUserData = (state: RootState) => state.login;
+export const showLoginData = (state: RootState) => state.login;
 export default loginSlice.reducer;

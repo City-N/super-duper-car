@@ -81,7 +81,8 @@
     "react-redux": "8.0.2",
     "react-router": "5.3.3",
     "react-router-dom": "5.3.3",
-    "redux": "4.2.0"
+    "redux": "4.2.0",
+    "redux-thunk": "2.4.1"
   },
   "bugs": {
     "url": "https://github.com/City-N/super-duper-car/issues"
