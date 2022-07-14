@@ -14,4 +14,6 @@ export const STAGES = {
 export const SUBJECT_TYPES = {
     LOGOUT: 'LOGOUT',
     SIGN_IN: 'SIGN_IN',
+    SIGN_UP: 'SIGN_UP',
+    GET_USER: 'GET_USER',
 };

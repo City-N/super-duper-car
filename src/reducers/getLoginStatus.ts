@@ -1,7 +1,9 @@
+import { STAGES, SUBJECT_TYPES } from 'constants/constants';
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { login, getUser } from 'API/auth-api';
 import type { ISignIn } from 'API/auth-api';
+import axios from 'axios';
 
 export interface LoginState {
     loading: boolean,
@@ -35,10 +37,10 @@ export const loginSlice = createSlice({
     name: 'login',
     initialState,
     reducers: {
-        addUserData: (state, action: PayloadAction<LoginState>) => {
+        addUserData: (state, action: PayloadAction<string>) => {
             state.data.push(action.payload);
         },
-        getUserData: (state, action: PayloadAction<LoginState>) => {
+        getUserData: (state, action: PayloadAction<string>) => {
             // eslint-disable-next-line no-param-reassign
             state.data = [action.payload];
         },

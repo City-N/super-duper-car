@@ -31,9 +31,9 @@ const SignInPage = () => {
 
     const loginDisp = value => dispatch(loginUserAsync(value));
 
-    const testRedux = useSelector(showUserData);
-    console.log(testRedux);
-    console.log(userData);
+    const login = useSelector(showUserData);
+    // console.log(login);
+    // console.log(userData);
 
     const formik = useFormik({
         initialValues: {
@@ -43,10 +43,10 @@ const SignInPage = () => {
         onSubmit: (values: ISignIn, { setSubmitting, resetForm }) =>
             // eslint-disable-next-line implicit-arrow-linebreak
             loginDisp(values)
+                .then(() => dispatch(getUserDataAsync()))
+                .then(() => setUserData({ ...userData, login }))
                 .then(() => resetForm())
                 .then(() => setSubmitting(false))
-                .then(() => dispatch(getUserDataAsync()))
-                .then(() => setUserData({ testRedux }))
                 .catch(() => setSubmitting(false)),
     });
 
