@@ -16,7 +16,7 @@ export const App = () => {
             />
             <Route exact path="/sign_in" component={SignInPage} />
             <Route exact path="/sign_up" component={SignUpPage} />
-            <Route exact path="/forum" component={ForumPage} />
+            <Route exact path="/leaders" component={ForumPage} />
         </Switch>
     );
 };

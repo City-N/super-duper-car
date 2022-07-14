@@ -62,10 +62,11 @@ function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
         return 1;
     }
     return 0;
-};
+}
 
 type Order = 'asc' | 'desc';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function getComparator<Key extends keyof any>(
     order: Order,
     orderBy: Key,
@@ -80,7 +81,7 @@ function getComparator<Key extends keyof any>(
 
 // This method is created for cross-browser compatibility, if you don't
 // need to support IE11, you can use Array.prototype.sort() directly
-function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) {
+function stableSort<T>(array: ReadonlyArray<T>, comparator: (a: T, b: T) => number) {
     const stabilizedThis = array.map((el, index) => [el, index] as [T, number]);
     stabilizedThis.sort((a, b) => {
         const order = comparator(a[0], b[0]);
@@ -89,7 +90,7 @@ function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) 
         }
         return a[1] - b[1];
     });
-    return stabilizedThis.map((el) => el[0]);
+    return stabilizedThis.map(el => el[0]);
 }
 
 interface HeadCell {
@@ -99,7 +100,7 @@ interface HeadCell {
     numeric: boolean;
 }
 
-const headCells: readonly HeadCell[] = [
+const headCells: ReadonlyArray<HeadCell> = [
     {
         id: 'avatar',
         numeric: false,
@@ -136,10 +137,10 @@ interface EnhancedTableProps {
 }
 
 function EnhancedTableHead(props: EnhancedTableProps) {
-    const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } =
-    props;
-    const createSortHandler =
-    (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
+    const {
+        onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort,
+    } = props;
+    const createSortHandler = (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
         onRequestSort(event, property);
     };
 
@@ -157,7 +158,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
                         }}
                     />
                 </TableCell>
-                {headCells.map((headCell) => (
+                {headCells.map(headCell => (
                     <TableCell
                         key={headCell.id}
                         padding={headCell.disablePadding ? 'none' : 'normal'}
@@ -190,15 +191,15 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
     const { numSelected } = props;
 
     return (
-        <Toolbar
-            sx={{
-                pl: { sm: 2 },
-                pr: { xs: 1, sm: 1 },
-                ...(numSelected > 0 && {
-                    bgcolor: (theme) =>
-                        alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
-                }),
-            }}
+        <Toolbar sx={{
+            pl: { sm: 2 },
+            pr: { xs: 1, sm: 1 },
+            ...(numSelected > 0 && {
+                bgcolor: theme => {
+                    alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity);
+                },
+            }),
+        }}
         >
             {numSelected > 0 ? (
                 <Typography
@@ -238,14 +239,14 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
 
 export default function LeaderTable() {
     const [order, setOrder] = React.useState<Order>('asc');
-    const [orderBy, setOrderBy] = React.useState<keyof Data>('calories');
-    const [selected, setSelected] = React.useState<readonly string[]>([]);
+    const [orderBy, setOrderBy] = React.useState<keyof Data>('record');
+    const [selected, setSelected] = React.useState<ReadonlyArray<string>>([]);
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
     const handleRequestSort = (
-        event: React.MouseEvent<unknown>,
+        _event: React.MouseEvent<unknown>,
         property: keyof Data,
     ) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -255,16 +256,16 @@ export default function LeaderTable() {
 
     const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.checked) {
-            const newSelecteds = rows.map((n) => n.name);
+            const newSelecteds = rows.map(n => n.name);
             setSelected(newSelecteds);
             return;
         }
         setSelected([]);
     };
 
-    const handleClick = (event: React.MouseEvent<unknown>, name: string) => {
+    const handleClick = (_event: React.MouseEvent<unknown>, name: string) => {
         const selectedIndex = selected.indexOf(name);
-        let newSelected: readonly string[] = [];
+        let newSelected: ReadonlyArray<string> = [];
 
         if (selectedIndex === -1) {
             newSelected = newSelected.concat(selected, name);
@@ -282,7 +283,7 @@ export default function LeaderTable() {
         setSelected(newSelected);
     };
 
-    const handleChangePage = (event: unknown, newPage: number) => {
+    const handleChangePage = (_event: unknown, newPage: number) => {
         setPage(newPage);
     };
 
@@ -298,8 +299,7 @@ export default function LeaderTable() {
     const isSelected = (name: string) => selected.indexOf(name) !== -1;
 
     // Avoid a layout jump when reaching the last page with empty rows.
-    const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
     return (
         <Box sx={{ width: '100%' }}>
@@ -320,8 +320,6 @@ export default function LeaderTable() {
                             rowCount={rows.length}
                         />
                         <TableBody>
-                            {/* if you don't need to support IE11, you can replace the `stableSort` call with:
-                            rows.slice().sort(getComparator(order, orderBy)) */}
                             {stableSort(rows, getComparator(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row, index) => {
@@ -331,7 +329,7 @@ export default function LeaderTable() {
                                     return (
                                         <TableRow
                                             hover
-                                            onClick={(event) => handleClick(event, row.name)}
+                                            onClick={event => handleClick(event, row.name)}
                                             role="checkbox"
                                             aria-checked={isItemSelected}
                                             tabIndex={-1}
