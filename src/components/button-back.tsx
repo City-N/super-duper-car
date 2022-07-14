@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import Button from '@mui/material/Button';
+import Link from '@mui/material/Link';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 interface ButtonBackProps {
@@ -7,15 +9,20 @@ interface ButtonBackProps {
 }
 
 const ButtonBack = ({ color }: ButtonBackProps) => (
-    <Button
-        variant="text"
-        color={color}
-        href="/"
-        startIcon={<ArrowBackIcon />}
-        style={{ textTransform: 'capitalize' }}
+    <Link
+        to="/"
+        underline="none"
+        component={RouterLink}
     >
-      Назад
-    </Button>
+        <Button
+            variant="text"
+            color={color}
+            startIcon={<ArrowBackIcon />}
+            style={{ textTransform: 'capitalize' }}
+        >
+            Назад
+        </Button>
+    </Link>
 );
 
 export default ButtonBack;
