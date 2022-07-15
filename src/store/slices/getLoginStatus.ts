@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { AppDispatch, RootState } from 'store/store';
+import type { AppDispatch, RootState } from 'store/store';
 import type { ISignIn } from 'API/auth-api';
 import { login } from 'API/auth-api';
 

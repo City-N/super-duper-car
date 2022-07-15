@@ -1,7 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import thunk from 'redux-thunk';
-import { loginSlice } from 'store/reducers/getLoginStatus';
-import { userSlice } from './reducers/GetUserSlice';
+import { loginSlice } from 'store/slices/getLoginStatus';
+import { userSlice } from './slices/GetUserSlice';
 
 const rootReducer = combineReducers({
     login: loginSlice.reducer,
@@ -10,7 +9,6 @@ const rootReducer = combineReducers({
 
 export const setupStore = () => configureStore({
     reducer: rootReducer,
-    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(thunk),
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

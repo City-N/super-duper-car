@@ -2,18 +2,27 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { IUser } from 'API/auth-api';
-import { RootState } from 'store/store';
-import { fetchUser } from './ActionCreatorGetUser';
+import type { RootState } from 'store/store';
+import { fetchUser } from '../reducers/ActionCreatorGetUser';
 
 export interface IGetUserState {
     isLoading: boolean;
-    data: IUser | Record<string, unknown>;
+    data: IUser;
     error: string;
 }
 
 const initialState: IGetUserState = {
     isLoading: false,
-    data: {},
+    data: {
+        id: 0,
+        display_name: '',
+        avatar: '',
+        first_name: '',
+        second_name: '',
+        login: '',
+        email: '',
+        phone: '',
+    },
     error: '',
 };
 

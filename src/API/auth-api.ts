@@ -19,7 +19,7 @@ interface ISignUp {
     phone: string;
 }
 
-interface IUser extends ISignUp {
+interface IUser extends Omit<ISignUp, 'password'> {
     id: number;
     // eslint-disable-next-line camelcase
     display_name: string;

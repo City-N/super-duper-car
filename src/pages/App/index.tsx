@@ -5,7 +5,7 @@ import SignInPage from 'pages/SignIn';
 import MainPage from 'pages/Main';
 import SignUpPage from 'pages/SignUp';
 import { useAppDispatch } from 'hooks/redux';
-import fetchUser from 'store/reducers/GetUserSlice';
+import fetchUser from 'store/slices/GetUserSlice';
 
 type TOwnProps = {
     error?: Error;
