@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {
-    SIGNIN_URL, LOGOUT_URL, SIGNUP_URL, GET_USER_URL,
+    SIGNIN_URL, LOGOUT_URL, SIGNUP_URL, GET_USER_URL, API_URL,
 } from 'constants/constants';
 
 interface ISignIn {
@@ -26,17 +26,24 @@ interface IUser extends Omit<ISignUp, 'password'> {
     avatar: string;
 }
 
-const login = <T>(data: T) => axios.post<string>(SIGNIN_URL, data, { withCredentials: true });
+const AxiosInstance = axios.create({
+    baseURL: API_URL,
+    headers: {
+        'content-type': 'application/json',
+    },
+    withCredentials: true,
+});
 
-const logout = () => axios.post(LOGOUT_URL, { withCredentials: true });
+const login = <T>(data: T) => AxiosInstance.post<string>(SIGNIN_URL, data);
 
-const signup = <T>(data: T) => axios.post<Record<string, number>>(
+const logout = () => AxiosInstance.post(LOGOUT_URL);
+
+const signup = <T>(data: T) => AxiosInstance.post<Record<string, number>>(
     SIGNUP_URL,
     data,
-    { withCredentials: true },
 );
 
-const getUser = () => axios.get(GET_USER_URL, { withCredentials: true });
+const getUser = () => AxiosInstance.get(GET_USER_URL);
 
 export {
     login, logout, signup, getUser, ISignIn, ISignUp, IUser,

@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { loginSlice } from 'store/slices/getLoginStatus';
+import { loginSlice } from 'store/slices/GetLoginStatusSlice';
 import { userSlice } from './slices/GetUserSlice';
 
 const rootReducer = combineReducers({

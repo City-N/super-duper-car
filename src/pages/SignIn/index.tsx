@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Button,
     Card,
@@ -19,7 +19,7 @@ import colors from 'colors';
 import { Link as RouterLink } from 'react-router-dom';
 import type { ISignIn } from 'API/auth-api';
 import { useAppDispatch } from 'hooks/redux';
-import { loginUserAsync } from 'store/slices/getLoginStatus';
+import { loginUserAsync } from 'store/slices/GetLoginStatusSlice';
 import fetchUser from 'store/slices/GetUserSlice';
 
 const SignInPage = () => {
