@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-    Switch, Route, Redirect, useHistory,
+    Switch, Route, Redirect, useHistory, RouterProps,
 } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
 import SignInPage from 'pages/SignIn';
@@ -25,7 +25,7 @@ function ErrorFallback({ error }: TProps) {
 }
 
 export const App = () => {
-    const history = useHistory();
+    const history: RouterProps['history'] = useHistory();
     const dispatch = useAppDispatch();
     const [isAuthenticated, setAuthenticated] = useState<boolean>(false);
     const { data } = useAppSelector(showUserData);
