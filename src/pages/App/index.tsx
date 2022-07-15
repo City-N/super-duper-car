@@ -42,6 +42,7 @@ export const App = () => {
                 }
             })
             .then(() => redirectoToHomePage());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data.id]);
 
     return (
