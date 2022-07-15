@@ -18,21 +18,28 @@ import { useFormik } from 'formik';
 import colors from 'colors';
 import { Link as RouterLink } from 'react-router-dom';
 import type { ISignIn } from 'API/auth-api';
-import { login } from 'API/auth-api';
+import { useAppDispatch } from 'hooks/redux';
+import { loginUserAsync } from 'store/slices/GetLoginStatusSlice';
+import fetchUser from 'store/slices/GetUserSlice';
 
 const SignInPage = () => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const handleClickShowPassword = () => setShowPassword(!showPassword);
     const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
+    const dispatch = useAppDispatch();
+
+    const loginDisp = (value: ISignIn) => dispatch(loginUserAsync(value));
+
     const formik = useFormik({
         initialValues: {
             login: '',
             password: '',
         },
-        onSubmit: (values: ISignIn, { setSubmitting, resetForm }) => login(values)
+        onSubmit: (values: ISignIn, { setSubmitting, resetForm }) => loginDisp(values)
             .then(() => resetForm())
             .then(() => setSubmitting(false))
+            .then(() => dispatch(fetchUser()))
             .catch(() => setSubmitting(false)),
     });
 

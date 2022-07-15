@@ -1,18 +1,15 @@
-import React, { useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import { Button } from '@mui/material';
+import { logout } from 'API/auth-api';
 
-const MainPage = () => {
-    const handleClick = useCallback(() => console.log('CLICK'), []);
-    return (
-        <Button
-            variant='contained'
-            sx={{ boxShadow: theme => theme.shadows[1] }}
-            onClick={handleClick}
-        >
-            <Link to='/sign_in'>Войти</Link>
-        </Button>
-    );
-};
+const MainPage = () => (
+    <Button
+        variant='contained'
+        sx={{ boxShadow: theme => theme.shadows[1] }}
+        onClick={() => logout()}
+    >
+        Выйти
+    </Button>
+);
 
 export default MainPage;
