@@ -126,7 +126,7 @@ const drawBG = (
     if (moveOnBg + CANVAS_X_SIZE >= imgCity.width) {
         moveOnBg = 0;
     }
-    moveOnBg += 3;
+    console.log(moveOnBg);
 };
 
 document.addEventListener('keydown', (e: KeyboardEvent) => {
@@ -134,7 +134,10 @@ document.addEventListener('keydown', (e: KeyboardEvent) => {
         case 'w':
             KEYS.w.pressed = true;
             lastKey = 'w';
-            HERO_POS.y = 220;
+            break;
+        case 'a':
+            KEYS.a.pressed = true;
+            lastKey = 'a';
             break;
         case 's':
             KEYS.s.pressed = true;
