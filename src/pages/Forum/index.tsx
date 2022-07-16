@@ -4,7 +4,7 @@ import PageTitle from 'components/page-title';
 import Forum from 'components/forum';
 import { Box } from '@mui/material';
 
-const SignUpPage = () => (
+const ForumPage = () => (
     <Box sx={{ p: 4 }}>
         <ButtonBack color="secondary" />
         <PageTitle title="Форумы 💻" />
@@ -12,4 +12,4 @@ const SignUpPage = () => (
     </Box>
 );
 
-export default SignUpPage;
+export default ForumPage;

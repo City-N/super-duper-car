@@ -4,7 +4,7 @@ import PageTitle from 'components/page-title';
 import LeaderTable from 'components/leader-table';
 import { Box } from '@mui/material';
 
-const SignUpPage = () => (
+const LeaderPage = () => (
     <Box sx={{ p: 4 }}>
         <ButtonBack color="secondary" />
         <PageTitle title="Наши лидеры 🏆" />
@@ -12,4 +12,4 @@ const SignUpPage = () => (
     </Box>
 );
 
-export default SignUpPage;
+export default LeaderPage;
