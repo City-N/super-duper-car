@@ -43,35 +43,25 @@ const rows = [
 ];
 
 interface HeadCell {
-    disablePadding: boolean;
     id: keyof Data;
     label: string;
-    numeric: boolean;
 }
 
 const headCells: ReadonlyArray<HeadCell> = [
     {
         id: 'avatar',
-        numeric: false,
-        disablePadding: true,
         label: 'Аватар',
     },
     {
         id: 'name',
-        numeric: false,
-        disablePadding: false,
         label: 'Имя',
     },
     {
         id: 'nickname',
-        numeric: false,
-        disablePadding: false,
         label: 'Никнейм',
     },
     {
         id: 'record',
-        numeric: true,
-        disablePadding: false,
         label: 'Рекорд',
     },
 ];
