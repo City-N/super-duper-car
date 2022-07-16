@@ -13,41 +13,37 @@ const CanvasComponent = () => {
     const imageRoad = new Image();
     const imageBack = new Image();
 
+    const CanvasXSize = 736;
+    const CanvasYSize = 472;
+
     const renderSky = (ctx: CanvasRenderingContext2D) => {
         imageBG.src = Sky;
-        imageBG.style.width = '736px';
-        imageBG.style.height = '472px';
 
         imageBG.onload = () => {
-            ctx?.drawImage(imageBG, 0, 0, 300, 150);
-            ctx.imageSmoothingEnabled = false;
+            ctx?.drawImage(imageBG, 0, 0, CanvasXSize, CanvasYSize);
         };
     };
 
     const renderBack = (ctx: CanvasRenderingContext2D) => {
         imageBack.src = Back;
-        imageBack.style.width = '736px';
-        imageBack.style.height = '472px';
 
         imageBack.onload = () => {
-            ctx?.drawImage(imageBack, 0, 0, 300, 150);
-            ctx.imageSmoothingEnabled = false;
+            ctx?.drawImage(imageBack, 0, 0, CanvasXSize, CanvasYSize);
         };
     };
 
     const renderRoad = (ctx: CanvasRenderingContext2D) => {
         imageRoad.src = Road;
-        imageRoad.style.width = '736px';
-        imageRoad.style.height = '472px';
 
         imageRoad.onload = () => {
-            ctx?.drawImage(imageRoad, 0, 0, 300, 150);
-            ctx.imageSmoothingEnabled = false;
+            ctx?.drawImage(imageRoad, 0, 0, CanvasXSize, CanvasYSize);
         };
     };
 
     useEffect(() => {
         const ctx = canvasRef.current.getContext('2d') as CanvasRenderingContext2D;
+        canvasRef.current.width = CanvasXSize;
+        canvasRef.current.height = CanvasYSize;
         renderSky(ctx);
         renderBack(ctx);
         renderRoad(ctx);

@@ -10,6 +10,8 @@ const useCanvas = (draw: ICanvas) => {
     useEffect(() => {
         const canvas = canvasRef.current;
         const context = canvas.getContext('2d');
+        canvas.width = 736;
+        canvas.height = 472;
 
         let frameCount = 0;
         let animationFrameId = 0;
