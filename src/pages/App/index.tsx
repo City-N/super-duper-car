@@ -6,6 +6,9 @@ import { ErrorBoundary } from 'react-error-boundary';
 import SignInPage from 'pages/SignIn';
 import MainPage from 'pages/Main';
 import SignUpPage from 'pages/SignUp';
+import ForumPage from 'pages/Forum';
+import LeaderTablePage from 'pages/LeaderTable';
+
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import fetchUser, { showUserData } from 'store/slices/GetUserSlice';
 
@@ -57,6 +60,8 @@ export const App = () => {
                 />
                 <Route exact path="/sign_in" component={SignInPage} />
                 <Route exact path="/sign_up" component={SignUpPage} />
+                <Route exact path="/leaders" component={LeaderTablePage} />
+                <Route exact path="/forum" component={ForumPage} />
             </Switch>
         </ErrorBoundary>
     );
