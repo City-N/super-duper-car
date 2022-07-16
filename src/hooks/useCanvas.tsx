@@ -1,7 +1,7 @@
 import { useRef, useEffect, MutableRefObject } from 'react';
 
 interface ICanvas {
-    draw: (ctx: HTMLCanvasElement, count: number) => void
+    draw: (ctx: HTMLCanvasElement, count?: number) => void
 }
 
 const useCanvas = (draw: ICanvas) => {
@@ -15,7 +15,7 @@ const useCanvas = (draw: ICanvas) => {
         let animationFrameId = 0;
 
         const render = () => {
-            frameCount++;
+            frameCount += 1;
             draw(context, frameCount);
             animationFrameId = window.requestAnimationFrame(render);
         };
