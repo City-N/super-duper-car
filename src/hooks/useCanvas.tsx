@@ -1,7 +1,7 @@
 import { useRef, useEffect, MutableRefObject } from 'react';
 
 interface ICanvas {
-    draw: (ctx: CanvasRenderingContext2D, count?: number) => void
+    draw: (ctx: CanvasRenderingContext2D, canvas?: HTMLCanvasElement) => void
 }
 
 const useCanvas = ({ draw }: ICanvas) => {
