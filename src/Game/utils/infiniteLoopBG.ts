@@ -35,7 +35,7 @@ const infiniteLoopBG = (
         if (SPRITE_POS.x > (CANVAS_X_SIZE - imgW)) {
             ctx.drawImage(
                 img,
-                SPRITE_POS.x - CANVAS_X_SIZE,
+                SPRITE_POS.x - CANVAS_X_SIZE + 1,
                 SPRITE_POS.y,
                 imgW,
                 imgH,
