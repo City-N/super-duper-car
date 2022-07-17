@@ -13,12 +13,12 @@ const useCanvas = ({ draw }: ICanvas) => {
         canvas.width = 736;
         canvas.height = 472;
 
-        let frameCount = 0;
+        // let frameCount = 0;
         let animationFrameId = 0;
 
         const render = () => {
-            frameCount += 1;
-            draw(context as CanvasRenderingContext2D, frameCount);
+            // frameCount += 1;
+            draw(context as CanvasRenderingContext2D);
             animationFrameId = window.requestAnimationFrame(render);
         };
         render();
