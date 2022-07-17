@@ -42,6 +42,10 @@ const drawHero = (
         imagHero.width / 6,
         imagHero.height,
     );
+
+    if (moveOn === 1220) {
+        moveOn = 0;
+    }
 };
 
 const drawSky = (
