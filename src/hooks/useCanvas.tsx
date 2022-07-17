@@ -1,10 +1,10 @@
 import { useRef, useEffect, MutableRefObject } from 'react';
 
 interface ICanvas {
-    draw: (ctx: HTMLCanvasElement, count?: number) => void
+    draw: (ctx: CanvasRenderingContext2D, count?: number) => void
 }
 
-const useCanvas = (draw: ICanvas) => {
+const useCanvas = ({ draw }: ICanvas) => {
     const canvasRef = useRef<HTMLCanvasElement>(null) as MutableRefObject<HTMLCanvasElement>;
 
     useEffect(() => {
@@ -18,7 +18,7 @@ const useCanvas = (draw: ICanvas) => {
 
         const render = () => {
             frameCount += 1;
-            draw(context, frameCount);
+            draw(context as CanvasRenderingContext2D, frameCount);
             animationFrameId = window.requestAnimationFrame(render);
         };
         render();
