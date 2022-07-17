@@ -4,7 +4,7 @@ import Road from '../img/game_sprites/city/Road.png';
 import Back from '../img/game_sprites/city/back.png';
 import HousesOne from '../img/game_sprites/city/houses1.png';
 import HousesThree from '../img/game_sprites/city/houses3.png';
-import Hero from '../img/game_sprites/truck/main.png';
+import Hero from '../img/game_sprites/truck/main/body/main.png';
 import {
     ROAD_POS,
     SKY_POS,
@@ -14,8 +14,12 @@ import {
     HERO_POS,
     CANVAS_X_SIZE,
     CANVAS_Y_SIZE,
+    KEYS,
 } from './game_constants';
 import { infiniteLoopBG } from './utils/index';
+
+const posX = 244;
+let moveOn = 0;
 
 const drawHero = (
     ctx: CanvasRenderingContext2D,
@@ -23,19 +27,20 @@ const drawHero = (
     const imagHero = new Image();
     imagHero.src = Hero;
 
-    const imgW = 251;
-    const imgH = 135;
-
     imagHero.onload = () => {
         ctx.clearRect(0, 0, CANVAS_X_SIZE, CANVAS_Y_SIZE);
     };
 
     ctx.drawImage(
         imagHero,
+        moveOn,
+        0,
+        imagHero.width / 6,
+        imagHero.height,
         HERO_POS.x,
         HERO_POS.y,
-        imgW,
-        imgH,
+        imagHero.width / 6,
+        imagHero.height,
     );
 };
 
@@ -105,6 +110,50 @@ const drawRoad = (
     imageRoad.src = Road;
     infiniteLoopBG(ctx, imageRoad, ROAD_POS);
 };
+
+let lastKey = '';
+document.addEventListener('keydown', (e: KeyboardEvent) => {
+    switch (e.key) {
+        case 'w':
+            KEYS.w.pressed = true;
+            lastKey = 'w';
+            break;
+        case 'a':
+            KEYS.a.pressed = true;
+            lastKey = 'a';
+            break;
+        case 's':
+            KEYS.s.pressed = true;
+            lastKey = 's';
+            break;
+        case 'd':
+            KEYS.d.pressed = true;
+            lastKey = 'd';
+            moveOn += posX;
+            break;
+        default:
+            break;
+    }
+});
+
+document.addEventListener('keyup', (e: KeyboardEvent) => {
+    switch (e.key) {
+        case 'w':
+            KEYS.w.pressed = false;
+            break;
+        case 'a':
+            KEYS.a.pressed = false;
+            break;
+        case 's':
+            KEYS.s.pressed = false;
+            break;
+        case 'd':
+            KEYS.d.pressed = false;
+            break;
+        default:
+            break;
+    }
+});
 
 const draw = (ctx: CanvasRenderingContext2D) => {
     drawSky(ctx);
