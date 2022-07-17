@@ -3,7 +3,7 @@ import colors from 'colors';
 
 import useCanvas from 'hooks/useCanvas';
 import style from './canvas.module.css';
-import draw from './game';
+import draw from '../../Game/game';
 
 const CanvasComponent = () => {
     const canvasRef = useCanvas({ draw });
