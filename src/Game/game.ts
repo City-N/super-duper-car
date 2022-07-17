@@ -2,8 +2,16 @@
 import Sky from '../img/game_sprites/city/Sky.png';
 import Road from '../img/game_sprites/city/Road.png';
 import Back from '../img/game_sprites/city/back.png';
+import HousesOne from '../img/game_sprites/city/houses1.png';
+import HousesThree from '../img/game_sprites/city/houses3.png';
 import {
-    ROAD_POS, SKY_POS, BACK_CITY_POS, CANVAS_X_SIZE, CANVAS_Y_SIZE,
+    ROAD_POS,
+    SKY_POS,
+    BACK_CITY_POS,
+    HOUSES_ONE_POS,
+    HOUSES_THREE_POS,
+    CANVAS_X_SIZE,
+    CANVAS_Y_SIZE,
 } from './game_constants';
 import { infiniteLoopBG } from './utils/index';
 
@@ -23,6 +31,48 @@ const drawSky = (
         imagSky,
         SKY_POS.x,
         SKY_POS.y,
+        imgW,
+        imgH,
+    );
+};
+
+const drawHousesOne = (
+    ctx: CanvasRenderingContext2D,
+) => {
+    const imagHousesOne = new Image();
+    imagHousesOne.src = HousesOne;
+
+    const imgW: number = CANVAS_X_SIZE;
+    const imgH: number = CANVAS_Y_SIZE;
+
+    imagHousesOne.onload = () => {
+        ctx.clearRect(0, 0, CANVAS_X_SIZE, CANVAS_Y_SIZE);
+    };
+    ctx.drawImage(
+        imagHousesOne,
+        HOUSES_ONE_POS.x,
+        HOUSES_ONE_POS.y,
+        imgW,
+        imgH,
+    );
+};
+
+const drawHousesThree = (
+    ctx: CanvasRenderingContext2D,
+) => {
+    const imagHousesThree = new Image();
+    imagHousesThree.src = HousesThree;
+
+    const imgW: number = CANVAS_X_SIZE;
+    const imgH: number = CANVAS_Y_SIZE;
+
+    imagHousesThree.onload = () => {
+        ctx.clearRect(0, 0, CANVAS_X_SIZE, CANVAS_Y_SIZE);
+    };
+    ctx.drawImage(
+        imagHousesThree,
+        HOUSES_THREE_POS.x,
+        HOUSES_THREE_POS.y,
         imgW,
         imgH,
     );
@@ -48,6 +98,8 @@ const drawRoad = (
 const draw = (ctx: CanvasRenderingContext2D) => {
     drawSky(ctx);
     drawBackCity(ctx);
+    drawHousesThree(ctx);
+    drawHousesOne(ctx);
     drawRoad(ctx);
 };
 
