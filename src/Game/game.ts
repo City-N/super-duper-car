@@ -36,8 +36,10 @@ const drawHero = (
         imagHero.height,
     );
 
-    if (moveOn === 1220) {
+    if (moveOn === 1220 && lastKey !== 'a') {
         moveOn = 0;
+    } else if (moveOn - (-posX) === posX && lastKey !== 'd') {
+        moveOn = 976;
     }
 };
 
@@ -68,7 +70,7 @@ const drawBG = (
     if (moveOnBg + CANVAS_X_SIZE >= imgCity.width) {
         moveOnBg = 0;
     }
-    console.log(moveOnBg);
+    // console.log(moveOnBg);
 };
 
 // const drawSky = (
@@ -147,6 +149,8 @@ document.addEventListener('keydown', (e: KeyboardEvent) => {
         case 'a':
             KEYS.a.pressed = true;
             lastKey = 'a';
+            moveOn -= posX;
+            moveOnBg -= bgPosX;
             break;
         case 's':
             KEYS.s.pressed = true;
