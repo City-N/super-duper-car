@@ -13,7 +13,24 @@ const CanvasComponent = () => {
             className={style.Canvas}
             ref={canvasRef}
             style={{ backgroundColor: colors.canvasBG }}
+            width={736}
+            height={472}
         />
+        // <div className={style.Stage} id="stage">
+        //     <canvas
+        //         className={style.Canvas}
+        //         ref={canvasRef}
+        //         style={{ backgroundColor: colors.canvasBG }}
+        //         width={736}
+        //         height={472}
+        //     />
+        //     <canvas
+        //         ref={canvasHeroRef}
+        //         className={style.Hero}
+        //         width={244}
+        //         height={204}
+        //     />
+        // </div>
     );
 };
 
