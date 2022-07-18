@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+import { throttle } from 'utils/throttle';
 import GameBG from '../img/game_sprites/city/main.png';
 import Hero from '../img/game_sprites/truck/main/body/main.png';
 import {
@@ -14,6 +15,13 @@ const posX = 244;
 let moveOn = 0;
 let lastKey = '';
 
+const throttleHeroMove = throttle(() => {
+    if (moveOn >= 1220) {
+        moveOn = 0;
+    }
+    moveOn += posX;
+}, 100, null);
+
 const drawHero = (
     ctx: CanvasRenderingContext2D,
 ) => {
@@ -22,6 +30,7 @@ const drawHero = (
 
     imagHero.onload = () => {
         ctx.clearRect(0, 0, CANVAS_X_SIZE, CANVAS_Y_SIZE);
+        ctx.drawImage(imagHero, HERO_POS.x, HERO_POS.y);
     };
 
     ctx.drawImage(
@@ -36,14 +45,9 @@ const drawHero = (
         imagHero.height,
     );
 
-    if (moveOn === 1220 && lastKey !== 'a') {
-        moveOn = 0;
-    } else if (moveOn - (-posX) === posX && lastKey !== 'd') {
-        moveOn = 976;
-    }
+    throttleHeroMove();
 };
 
-const bgPosX = 25;
 let moveOnBg = 0;
 const drawBG = (
     ctx: CanvasRenderingContext2D,
@@ -70,7 +74,7 @@ const drawBG = (
     if (moveOnBg + CANVAS_X_SIZE >= imgCity.width) {
         moveOnBg = 0;
     }
-    // console.log(moveOnBg);
+    moveOnBg += 3;
 };
 
 // const drawSky = (
@@ -145,22 +149,12 @@ document.addEventListener('keydown', (e: KeyboardEvent) => {
         case 'w':
             KEYS.w.pressed = true;
             lastKey = 'w';
-            break;
-        case 'a':
-            KEYS.a.pressed = true;
-            lastKey = 'a';
-            moveOn -= posX;
-            moveOnBg -= bgPosX;
+            HERO_POS.y = 220;
             break;
         case 's':
             KEYS.s.pressed = true;
             lastKey = 's';
-            break;
-        case 'd':
-            KEYS.d.pressed = true;
-            lastKey = 'd';
-            moveOn += posX;
-            moveOnBg += bgPosX;
+            HERO_POS.y = 260;
             break;
         default:
             break;
@@ -172,14 +166,8 @@ document.addEventListener('keyup', (e: KeyboardEvent) => {
         case 'w':
             KEYS.w.pressed = false;
             break;
-        case 'a':
-            KEYS.a.pressed = false;
-            break;
         case 's':
             KEYS.s.pressed = false;
-            break;
-        case 'd':
-            KEYS.d.pressed = false;
             break;
         default:
             break;

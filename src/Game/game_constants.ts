@@ -10,7 +10,7 @@ const BG_POS = {
 
 const HERO_POS = {
     x: 18,
-    y: 250,
+    y: 260,
     dx: 3,
     dy: -2,
 };
