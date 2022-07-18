@@ -1,8 +1,8 @@
 /* eslint-disable prefer-rest-params */
-export function throttle(callback: (...args: unknown[]) => void, delay: number, ctx: never) {
+export function throttle(callback: (...args: unknown[]) => void, delay: number, ctx: unknown) {
     let isThrottled = false;
     let args: IArguments | null;
-    let context: never | null;
+    let context: unknown | null;
     function wrapper() {
         if (isThrottled) {
             args = arguments;
