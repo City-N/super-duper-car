@@ -1,28 +1,25 @@
-export function throttle(callback: (args?: unknown) => void, wait: number, context = this) {
-    // Ваш код здесь
+/* eslint-disable prefer-rest-params */
+export function throttle(callback: (...args: unknown[]) => void, delay: number, ctx: never) {
     let isThrottled = false;
-    let savedArgs: IArguments;
-    let savedThis;
-
+    let args: IArguments | null;
+    let context: never | null;
     function wrapper() {
-        if (isThrottled) { // (2)
-            savedArgs = arguments;
-            savedThis = this;
+        if (isThrottled) {
+            args = arguments;
+            context = ctx;
             return;
         }
-
-        callback.apply(context, arguments); // (1)
-
         isThrottled = true;
-
+        callback.apply(ctx, [...arguments]);
         setTimeout(() => {
-            isThrottled = false; // (3)
-            if (savedArgs) {
-                wrapper.apply(savedThis, savedArgs);
-                savedArgs = savedThis = null;
+            isThrottled = false;
+            if (args) {
+                const [arg] = args;
+                wrapper.apply(ctx, arg);
+                // eslint-disable-next-line no-multi-assign, @typescript-eslint/no-unused-vars
+                args = context = null;
             }
-        }, wait);
+        }, delay);
     }
-
     return wrapper;
 }
