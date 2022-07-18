@@ -1,25 +1,18 @@
 /* eslint-disable no-param-reassign */
-import Sky from '../img/game_sprites/city/Sky.png';
-import Road from '../img/game_sprites/city/Road.png';
-import Back from '../img/game_sprites/city/back.png';
-import HousesOne from '../img/game_sprites/city/houses1.png';
-import HousesThree from '../img/game_sprites/city/houses3.png';
+import GameBG from '../img/game_sprites/city/main.png';
 import Hero from '../img/game_sprites/truck/main/body/main.png';
 import {
-    ROAD_POS,
-    SKY_POS,
-    BACK_CITY_POS,
-    HOUSES_ONE_POS,
-    HOUSES_THREE_POS,
+    BG_POS,
     HERO_POS,
     CANVAS_X_SIZE,
     CANVAS_Y_SIZE,
     KEYS,
 } from './game_constants';
-import { infiniteLoopBG } from './utils/index';
+// import { infiniteLoopBG } from './utils/index';
 
 const posX = 244;
 let moveOn = 0;
+let lastKey = '';
 
 const drawHero = (
     ctx: CanvasRenderingContext2D,
@@ -48,74 +41,103 @@ const drawHero = (
     }
 };
 
-const drawSky = (
+const bgPosX = 25;
+let moveOnBg = 0;
+const drawBG = (
     ctx: CanvasRenderingContext2D,
 ) => {
-    const imagSky = new Image();
-    imagSky.src = Sky;
-    infiniteLoopBG(ctx, imagSky, SKY_POS);
-};
+    const imgCity = new Image();
+    imgCity.src = GameBG;
 
-const drawHousesOne = (
-    ctx: CanvasRenderingContext2D,
-) => {
-    const imagHousesOne = new Image();
-    imagHousesOne.src = HousesOne;
-
-    const imgW: number = CANVAS_X_SIZE;
-    const imgH: number = CANVAS_Y_SIZE;
-
-    imagHousesOne.onload = () => {
+    imgCity.onload = () => {
         ctx.clearRect(0, 0, CANVAS_X_SIZE, CANVAS_Y_SIZE);
     };
+
     ctx.drawImage(
-        imagHousesOne,
-        HOUSES_ONE_POS.x,
-        HOUSES_ONE_POS.y,
-        imgW,
-        imgH,
+        imgCity,
+        moveOnBg,
+        0,
+        imgCity.width / 9,
+        imgCity.height,
+        BG_POS.x,
+        BG_POS.y,
+        imgCity.width / 9,
+        imgCity.height,
     );
+
+    if (moveOnBg + CANVAS_X_SIZE >= imgCity.width) {
+        moveOnBg = 0;
+    }
+    console.log(moveOnBg);
 };
 
-const drawHousesThree = (
-    ctx: CanvasRenderingContext2D,
-) => {
-    const imagHousesThree = new Image();
-    imagHousesThree.src = HousesThree;
+// const drawSky = (
+//     ctx: CanvasRenderingContext2D,
+// ) => {
+//     const imagSky = new Image();
+//     imagSky.src = Sky;
+//     infiniteLoopBG(ctx, imagSky, SKY_POS);
+// };
 
-    const imgW: number = CANVAS_X_SIZE;
-    const imgH: number = CANVAS_Y_SIZE;
+// const drawHousesOne = (
+//     ctx: CanvasRenderingContext2D,
+// ) => {
+//     const imagHousesOne = new Image();
+//     imagHousesOne.src = HousesOne;
 
-    imagHousesThree.onload = () => {
-        ctx.clearRect(0, 0, CANVAS_X_SIZE, CANVAS_Y_SIZE);
-    };
-    ctx.drawImage(
-        imagHousesThree,
-        HOUSES_THREE_POS.x,
-        HOUSES_THREE_POS.y,
-        imgW,
-        imgH,
-    );
-};
+//     const imgW: number = CANVAS_X_SIZE;
+//     const imgH: number = CANVAS_Y_SIZE;
 
-const drawBackCity = (
-    ctx: CanvasRenderingContext2D,
-) => {
-    const imagBackCity = new Image();
-    imagBackCity.src = Back;
+//     imagHousesOne.onload = () => {
+//         ctx.clearRect(0, 0, CANVAS_X_SIZE, CANVAS_Y_SIZE);
+//     };
+//     ctx.drawImage(
+//         imagHousesOne,
+//         HOUSES_ONE_POS.x,
+//         HOUSES_ONE_POS.y,
+//         imgW,
+//         imgH,
+//     );
+// };
 
-    infiniteLoopBG(ctx, imagBackCity, BACK_CITY_POS);
-};
+// const drawHousesThree = (
+//     ctx: CanvasRenderingContext2D,
+// ) => {
+//     const imagHousesThree = new Image();
+//     imagHousesThree.src = HousesThree;
 
-const drawRoad = (
-    ctx: CanvasRenderingContext2D,
-) => {
-    const imageRoad = new Image();
-    imageRoad.src = Road;
-    infiniteLoopBG(ctx, imageRoad, ROAD_POS);
-};
+//     const imgW: number = CANVAS_X_SIZE;
+//     const imgH: number = CANVAS_Y_SIZE;
 
-let lastKey = '';
+//     imagHousesThree.onload = () => {
+//         ctx.clearRect(0, 0, CANVAS_X_SIZE, CANVAS_Y_SIZE);
+//     };
+//     ctx.drawImage(
+//         imagHousesThree,
+//         HOUSES_THREE_POS.x,
+//         HOUSES_THREE_POS.y,
+//         imgW,
+//         imgH,
+//     );
+// };
+
+// const drawBackCity = (
+//     ctx: CanvasRenderingContext2D,
+// ) => {
+//     const imagBackCity = new Image();
+//     imagBackCity.src = Back;
+
+//     infiniteLoopBG(ctx, imagBackCity, BACK_CITY_POS);
+// };
+
+// const drawRoad = (
+//     ctx: CanvasRenderingContext2D,
+// ) => {
+//     const imageRoad = new Image();
+//     imageRoad.src = Road;
+//     infiniteLoopBG(ctx, imageRoad, ROAD_POS);
+// };
+
 document.addEventListener('keydown', (e: KeyboardEvent) => {
     switch (e.key) {
         case 'w':
@@ -134,6 +156,7 @@ document.addEventListener('keydown', (e: KeyboardEvent) => {
             KEYS.d.pressed = true;
             lastKey = 'd';
             moveOn += posX;
+            moveOnBg += bgPosX;
             break;
         default:
             break;
@@ -160,11 +183,12 @@ document.addEventListener('keyup', (e: KeyboardEvent) => {
 });
 
 const draw = (ctx: CanvasRenderingContext2D) => {
-    drawSky(ctx);
-    drawBackCity(ctx);
-    drawHousesThree(ctx);
-    drawHousesOne(ctx);
-    drawRoad(ctx);
+    // drawSky(ctx);
+    // drawBackCity(ctx);
+    // drawHousesThree(ctx);
+    // drawHousesOne(ctx);
+    // drawRoad(ctx);
+    drawBG(ctx);
     drawHero(ctx);
 };
 
