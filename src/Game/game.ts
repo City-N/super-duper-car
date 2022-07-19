@@ -2,6 +2,7 @@
 import { throttle } from 'utils/throttle';
 import GameBG from '../img/game_sprites/city/main.png';
 import Hero from '../img/game_sprites/truck/main/body/main.png';
+import EnemyFirst from '../img/game_sprites/truck/enemys/main/main.png';
 import {
     BG_POS,
     HERO_POS,
@@ -9,7 +10,6 @@ import {
     CANVAS_Y_SIZE,
     KEYS,
 } from './game_constants';
-// import { infiniteLoopBG } from './utils/index';
 
 const posX = 244;
 let moveOn = 0;
@@ -20,7 +20,7 @@ const throttleHeroMove = throttle(() => {
         moveOn = 0;
     }
     moveOn += posX;
-}, 100, null);
+}, 80, null);
 
 const drawHero = (
     ctx: CanvasRenderingContext2D,
@@ -46,6 +46,41 @@ const drawHero = (
     );
 
     throttleHeroMove();
+};
+
+let moveOnEnemy = 0;
+
+const throttleEnemyMove = throttle(() => {
+    if (moveOnEnemy >= 732) {
+        moveOnEnemy = 0;
+    }
+    moveOnEnemy += posX;
+}, 80, null);
+
+const drawEnemyFirst = (
+    ctx: CanvasRenderingContext2D,
+) => {
+    const imageEnemy = new Image();
+    imageEnemy.src = EnemyFirst;
+
+    imageEnemy.onload = () => {
+        ctx.clearRect(0, 0, CANVAS_X_SIZE, CANVAS_Y_SIZE);
+        // ctx.drawImage(imageEnemy, 138, 260);
+    };
+
+    ctx.drawImage(
+        imageEnemy,
+        moveOnEnemy,
+        0,
+        imageEnemy.width / 4,
+        imageEnemy.height,
+        338,
+        290,
+        imageEnemy.width / 4,
+        imageEnemy.height,
+    );
+
+    throttleEnemyMove();
 };
 
 let moveOnBg = 0;
@@ -108,13 +143,9 @@ document.addEventListener('keyup', (e: KeyboardEvent) => {
 });
 
 const draw = (ctx: CanvasRenderingContext2D) => {
-    // drawSky(ctx);
-    // drawBackCity(ctx);
-    // drawHousesThree(ctx);
-    // drawHousesOne(ctx);
-    // drawRoad(ctx);
     drawBG(ctx);
     drawHero(ctx);
+    drawEnemyFirst(ctx);
 };
 
 export default draw;
