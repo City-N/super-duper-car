@@ -44,7 +44,6 @@ const drawHero = (
         imagHero.width / 6,
         imagHero.height,
     );
-
     throttleHeroMove();
 };
 
@@ -57,6 +56,19 @@ const throttleEnemyMove = throttle(() => {
     moveOnEnemy += posX;
 }, 80, null);
 
+function generateRandom(min = 0, max = 1): number {
+    const difference = max - min + 1;
+    let rand = Math.random();
+
+    rand = Math.floor(rand * difference);
+
+    rand += min;
+
+    return rand;
+}
+
+let enemPosX = 438;
+let enemPosY = 220;
 const drawEnemyFirst = (
     ctx: CanvasRenderingContext2D,
 ) => {
@@ -65,7 +77,6 @@ const drawEnemyFirst = (
 
     imageEnemy.onload = () => {
         ctx.clearRect(0, 0, CANVAS_X_SIZE, CANVAS_Y_SIZE);
-        // ctx.drawImage(imageEnemy, 138, 260);
     };
 
     ctx.drawImage(
@@ -74,13 +85,19 @@ const drawEnemyFirst = (
         0,
         imageEnemy.width / 4,
         imageEnemy.height,
-        338,
-        290,
+        enemPosX,
+        enemPosY,
         imageEnemy.width / 4,
         imageEnemy.height,
     );
-
     throttleEnemyMove();
+
+    if (enemPosX <= -(imageEnemy.width / 4)) {
+        enemPosX = Math.floor(Math.random() * CANVAS_X_SIZE) + 1000;
+        enemPosY = generateRandom() ? 260 : 220;
+    }
+
+    enemPosX -= 5;
 };
 
 let moveOnBg = 0;
@@ -144,8 +161,8 @@ document.addEventListener('keyup', (e: KeyboardEvent) => {
 
 const draw = (ctx: CanvasRenderingContext2D) => {
     drawBG(ctx);
-    drawHero(ctx);
     drawEnemyFirst(ctx);
+    drawHero(ctx);
 };
 
 export default draw;
