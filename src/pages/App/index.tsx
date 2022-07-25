@@ -64,8 +64,7 @@ export const App = () => {
                 <Route exact path="/sign_up" component={SignUpPage} />
                 <Route exact path="/leaders" component={LeaderTablePage} />
                 <Route exact path="/forum" component={ForumPage} />
-                <Route exact path="/500" component={ServerErrorPage} />
-                <Route exact path="/404" component={NotFoundErrorPage} />
+                <Route exact path="*" component={NotFoundErrorPage} />
             </Switch>
         </ErrorBoundary>
     );
