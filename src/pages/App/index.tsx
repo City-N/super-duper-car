@@ -8,6 +8,7 @@ import MainPage from 'pages/Main';
 import SignUpPage from 'pages/SignUp';
 import ForumPage from 'pages/Forum';
 import LeaderTablePage from 'pages/LeaderTable';
+import NotFoundErrorPage from 'pages/NotFoundError';
 
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import fetchUser, { showUserData } from 'store/slices/GetUserSlice';
@@ -62,6 +63,7 @@ export const App = () => {
                 <Route exact path="/sign_up" component={SignUpPage} />
                 <Route exact path="/leaders" component={LeaderTablePage} />
                 <Route exact path="/forum" component={ForumPage} />
+                <Route exact path="*" component={NotFoundErrorPage} />
             </Switch>
         </ErrorBoundary>
     );
