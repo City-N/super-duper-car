@@ -8,7 +8,6 @@ import MainPage from 'pages/Main';
 import SignUpPage from 'pages/SignUp';
 import ForumPage from 'pages/Forum';
 import LeaderTablePage from 'pages/LeaderTable';
-import ServerErrorPage from 'pages/ServerError';
 import NotFoundErrorPage from 'pages/NotFoundError';
 
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
