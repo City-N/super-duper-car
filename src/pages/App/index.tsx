@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import {
     Switch, Route, useHistory, RouterProps,
 } from 'react-router-dom';
@@ -28,7 +28,8 @@ function ErrorFallback({ error }: TProps) {
     );
 }
 
-export const App = () => {
+// eslint-disable-next-line
+export const App = memo(() => {
     const history: RouterProps['history'] = useHistory();
     const dispatch = useAppDispatch();
     const { data } = useAppSelector(showUserData);
@@ -36,8 +37,8 @@ export const App = () => {
     const redirectoToHomePage = () => history.push('/');
 
     useEffect(() => {
-        dispatch(fetchUser()).then(() => {
-            if (data.id !== 0) {
+        dispatch(fetchUser()).then(({ payload }) => {
+            if (payload.id) {
                 redirectoToHomePage();
             } else {
                 history.push('/sign_in');
@@ -58,4 +59,4 @@ export const App = () => {
             </Switch>
         </ErrorBoundary>
     );
-};
+});
