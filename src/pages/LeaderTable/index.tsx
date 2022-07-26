@@ -1,7 +1,7 @@
 import React from 'react';
-import ButtonBack from 'components/button-back';
-import PageTitle from 'components/page-title';
-import LeaderTable from 'components/leader-table';
+import ButtonBack from 'components/BackButton';
+import PageTitle from 'components/PageTitle';
+import LeaderTable from 'components/LeaderBoard';
 import { Box } from '@mui/material';
 
 const LeaderPage = () => (

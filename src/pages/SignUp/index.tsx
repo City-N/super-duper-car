@@ -15,8 +15,8 @@ import colors from 'colors';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link as RouterLink } from 'react-router-dom';
 import theme from 'theme';
-import type { ISignUp } from 'API/auth-api';
-import { signup } from 'API/auth-api';
+import type { ISignUp } from 'API/AuthApi';
+import { signup } from 'API/AuthApi';
 
 const SignUpPage = () => {
     const formik = useFormik({
@@ -45,7 +45,7 @@ const SignUpPage = () => {
                 style={{ minHeight: '100vh' }}
             >
                 <Grid item xs={3}>
-                    <form onSubmit={formik.handleSubmit}>
+                    <form onSubmit={formik.handleSubmit} autoComplete="off">
                         <Card
                             sx={{
                                 borderRadius: '32px',
@@ -58,7 +58,7 @@ const SignUpPage = () => {
                                     padding: 0,
                                 }}
                             >
-                                <Typography variant='h1' padding="0 0 32px 0">Регистрация 🏎</Typography>
+                                <Typography variant="h1" padding="0 0 32px 0">Регистрация 🏎</Typography>
                                 <TextField
                                     id="first_name"
                                     label="Имя"
@@ -69,11 +69,6 @@ const SignUpPage = () => {
                                     sx={{
                                         paddingBottom: '16px',
                                         width: '100%',
-                                    }}
-                                    inputProps={{
-                                        form: {
-                                            autoComplete: 'off',
-                                        },
                                     }}
                                 />
                                 <TextField
@@ -87,11 +82,6 @@ const SignUpPage = () => {
                                         paddingBottom: '16px',
                                         width: '100%',
                                     }}
-                                    inputProps={{
-                                        form: {
-                                            autoComplete: 'off',
-                                        },
-                                    }}
                                 />
                                 <TextField
                                     id="login"
@@ -104,11 +94,6 @@ const SignUpPage = () => {
                                         paddingBottom: '16px',
                                         width: '100%',
                                     }}
-                                    inputProps={{
-                                        form: {
-                                            autoComplete: 'off',
-                                        },
-                                    }}
                                 />
                                 <TextField
                                     id="email"
@@ -120,11 +105,6 @@ const SignUpPage = () => {
                                     sx={{
                                         paddingBottom: '16px',
                                         width: '100%',
-                                    }}
-                                    inputProps={{
-                                        form: {
-                                            autoComplete: 'off',
-                                        },
                                     }}
                                 />
                                 <TextField
@@ -139,13 +119,6 @@ const SignUpPage = () => {
                                         width: '100%',
                                         paddingBottom: '16px',
                                     }}
-                                    inputProps={{
-                                        autoComplete: 'new-password',
-                                        form: {
-                                            autoComplete: 'off',
-                                        },
-
-                                    }}
                                 />
                                 <TextField
                                     id="phone"
@@ -156,11 +129,6 @@ const SignUpPage = () => {
                                     onChange={formik.handleChange}
                                     sx={{
                                         width: '100%',
-                                    }}
-                                    inputProps={{
-                                        form: {
-                                            autoComplete: 'off',
-                                        },
                                     }}
                                 />
                             </CardContent>
@@ -183,18 +151,16 @@ const SignUpPage = () => {
                                             }}
                                         >
                                             <Typography
-                                                variant='button'
+                                                variant="button"
                                                 color={colors.white}
-                                                fontWeight='bold'
-                                            >
-                                                Погнали! 🤘
-                                            </Typography>
+                                                fontWeight="bold"
+                                            >Погнали! 🤘</Typography>
                                         </Button>
                                     </Grid>
                                     <Grid container item xs={12}>
                                         <Grid item>
                                             <ArrowBackIcon
-                                                color='primary'
+                                                color="primary"
                                                 sx={{
                                                     paddingRight: theme.spacing(1),
                                                 }}
@@ -206,7 +172,9 @@ const SignUpPage = () => {
                                                 underline="none"
                                                 component={RouterLink}
                                             >
-                                                <Typography variant='button'>Вход</Typography>
+                                                <Typography variant="button">
+                                                    Вход
+                                                </Typography>
                                             </Link>
                                         </Grid>
                                     </Grid>

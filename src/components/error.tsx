@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonBack from 'components/button-back';
+import ButtonBack from 'components/BackButton';
 import { Container, Typography } from '@mui/material';
 
 interface ErrorProps {

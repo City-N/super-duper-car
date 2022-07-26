@@ -17,7 +17,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useFormik } from 'formik';
 import colors from 'colors';
 import { Link as RouterLink } from 'react-router-dom';
-import type { ISignIn } from 'API/auth-api';
+import type { ISignIn } from 'API/AuthApi';
 import { useAppDispatch } from 'hooks/redux';
 import { loginUserAsync } from 'store/slices/GetLoginStatusSlice';
 import fetchUser from 'store/slices/GetUserSlice';
@@ -54,7 +54,7 @@ const SignInPage = () => {
                 style={{ minHeight: '100vh' }}
             >
                 <Grid item xs={3}>
-                    <form onSubmit={formik.handleSubmit}>
+                    <form onSubmit={formik.handleSubmit} autoComplete="off">
                         <Card
                             sx={{
                                 borderRadius: '32px',
@@ -67,7 +67,9 @@ const SignInPage = () => {
                                     padding: 0,
                                 }}
                             >
-                                <Typography variant='h1' padding="0 0 32px 0">Поехали 🏎</Typography>
+                                <Typography variant="h1" padding="0 0 32px 0">
+                                    Поехали 🏎
+                                </Typography>
                                 <TextField
                                     id="login"
                                     label="Логин"
@@ -79,11 +81,6 @@ const SignInPage = () => {
                                     sx={{
                                         paddingBottom: '16px',
                                         width: '100%',
-                                    }}
-                                    inputProps={{
-                                        form: {
-                                            autoComplete: 'off',
-                                        },
                                     }}
                                 />
 
@@ -98,13 +95,6 @@ const SignInPage = () => {
                                     sx={{
                                         width: '100%',
                                     }}
-                                    inputProps={{
-                                        autoComplete: 'new-password',
-                                        form: {
-                                            autoComplete: 'off',
-                                        },
-
-                                    }}
                                     InputProps={{
                                         endAdornment: (
                                             <InputAdornment position="end">
@@ -113,10 +103,11 @@ const SignInPage = () => {
                                                     onClick={handleClickShowPassword}
                                                     onMouseDown={handleMouseDownPassword}
                                                 >
-                                                    {showPassword
-                                                        ? <VisibilityIcon />
-                                                        : <VisibilityOffIcon />
-                                                    }
+                                                    {showPassword ? (
+                                                        <VisibilityIcon />
+                                                    ) : (
+                                                        <VisibilityOffIcon />
+                                                    )}
                                                 </IconButton>
                                             </InputAdornment>
                                         ),
@@ -127,8 +118,12 @@ const SignInPage = () => {
                                             underline="none"
                                             component={RouterLink}
                                         >
-                                            <Typography variant='caption' color={colors.main}>
-                                                У вас нет аккаунта ? Давайте зарегестрируемся!
+                                            <Typography
+                                                variant="caption"
+                                                color={colors.main}
+                                            >
+                                                У вас нет аккаунта ? Давайте
+                                                зарегестрируемся!
                                             </Typography>
                                         </Link>
                                     }
@@ -151,9 +146,9 @@ const SignInPage = () => {
                                     }}
                                 >
                                     <Typography
-                                        variant='button'
+                                        variant="button"
                                         color={colors.white}
-                                        fontWeight='bold'
+                                        fontWeight="bold"
                                     >
                                         Войти 🦾
                                     </Typography>

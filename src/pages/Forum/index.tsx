@@ -1,7 +1,7 @@
 import React from 'react';
-import ButtonBack from 'components/button-back';
-import PageTitle from 'components/page-title';
-import Forum from 'components/forum';
+import ButtonBack from 'components/BackButton';
+import PageTitle from 'components/PageTitle';
+import Forum from 'components/Forum';
 import { Box } from '@mui/material';
 
 const ForumPage = () => (
