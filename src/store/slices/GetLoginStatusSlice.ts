@@ -2,8 +2,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { AppDispatch, RootState } from 'store/store';
-import type { ISignIn } from 'API/auth-api';
-import { login } from 'API/auth-api';
+import type { ISignIn } from 'API/AuthApi';
+import { login } from 'API/AuthApi';
 
 export interface ILoginState {
     isLoading: boolean;

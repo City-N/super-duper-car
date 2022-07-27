@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
-    Switch, Route, Redirect, useHistory, RouterProps,
+    Switch, Route, useHistory, RouterProps,
 } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
 import SignInPage from 'pages/SignIn';
@@ -31,38 +31,29 @@ function ErrorFallback({ error }: TProps) {
 export const App = () => {
     const history: RouterProps['history'] = useHistory();
     const dispatch = useAppDispatch();
-    const [isAuthenticated, setAuthenticated] = useState<boolean>(false);
     const { data } = useAppSelector(showUserData);
 
     const redirectoToHomePage = () => history.push('/');
 
     useEffect(() => {
-        dispatch(fetchUser())
-            .then(() => {
-                if (data.id !== 0) {
-                    setAuthenticated(true);
-                } else {
-                    setAuthenticated(false);
-                }
-            })
-            .then(() => redirectoToHomePage());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        dispatch(fetchUser()).then(({ payload }) => {
+            if (payload.id) {
+                redirectoToHomePage();
+            } else {
+                history.push('/sign_in');
+            }
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data.id]);
 
     return (
-        <ErrorBoundary
-            FallbackComponent={ErrorFallback}
-        >
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Switch>
-                <Route
-                    exact
-                    path="/"
-                    render={() => (isAuthenticated ? <MainPage /> : <Redirect to='/sign_in' />)}
-                />
-                <Route exact path="/sign_in" component={SignInPage} />
-                <Route exact path="/sign_up" component={SignUpPage} />
-                <Route exact path="/leaders" component={LeaderTablePage} />
-                <Route exact path="/forum" component={ForumPage} />
+                <Route exact path="/" component={MainPage} />
+                <Route path="/sign_in" component={SignInPage} />
+                <Route path="/sign_up" component={SignUpPage} />
+                <Route path="/leaders" component={LeaderTablePage} />
+                <Route path="/forum" component={ForumPage} />
                 <Route exact path="*" component={NotFoundErrorPage} />
             </Switch>
         </ErrorBoundary>
