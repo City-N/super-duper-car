@@ -1,4 +1,4 @@
-import React, { useEffect, memo } from 'react';
+import React, { useEffect } from 'react';
 import {
     Switch, Route, useHistory, RouterProps,
 } from 'react-router-dom';
@@ -28,8 +28,7 @@ function ErrorFallback({ error }: TProps) {
     );
 }
 
-// eslint-disable-next-line
-export const App = memo(() => {
+export const App = () => {
     const history: RouterProps['history'] = useHistory();
     const dispatch = useAppDispatch();
     const { data } = useAppSelector(showUserData);
@@ -59,4 +58,4 @@ export const App = memo(() => {
             </Switch>
         </ErrorBoundary>
     );
-});
+};
