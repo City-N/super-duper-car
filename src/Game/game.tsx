@@ -26,18 +26,9 @@ const throttleEnemyMove = throttle(() => {
 }, 80, null);
 
 function generateRandom(): number {
-	let rand = Math.random();
-
-	rand = Math.floor(rand * 2);
-
-	return rand;
-}
-    const difference = max - min + 1;
     let rand = Math.random();
 
-    rand = Math.floor(rand * difference);
-
-    rand += min;
+    rand = Math.floor(rand * 2);
 
     return rand;
 }
@@ -120,10 +111,6 @@ const drawHero = (
         );
         throttleHeroMove();
     }
-
-    // if (HERO_POS.y === enemPosY) {
-    //     alert('Вы проебались сээээр');
-    // }
 };
 
 let moveOnBg = 0;
