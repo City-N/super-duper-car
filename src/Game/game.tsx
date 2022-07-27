@@ -25,7 +25,13 @@ const throttleEnemyMove = throttle(() => {
     moveOnEnemy += posX;
 }, 80, null);
 
-function generateRandom(min = 0, max = 1): number {
+function generateRandom(): number {
+	let rand = Math.random();
+
+	rand = Math.floor(rand * 2);
+
+	return rand;
+}
     const difference = max - min + 1;
     let rand = Math.random();
 
