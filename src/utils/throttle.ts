@@ -15,7 +15,7 @@ export function throttle(callback: (...args: unknown[]) => void, delay: number, 
             isThrottled = false;
             if (args) {
                 const [arg] = args;
-                wrapper.apply(ctx, arg);
+                wrapper.apply(context, arg);
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-multi-assign
                 args = context = null;
             }
