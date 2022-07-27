@@ -30,27 +30,6 @@ const KEYS = {
     },
 };
 
-const HOUSES_ONE_POS = {
-    x: 0,
-    y: 0,
-    dx: 3,
-    dy: -2,
-};
-
-const HOUSES_THREE_POS = {
-    x: 0,
-    y: 0,
-    dx: 3,
-    dy: -2,
-};
-
-const HERO_POS = {
-    x: 18,
-    y: 330,
-    dx: 3,
-    dy: -2,
-};
-
 export {
     CANVAS_X_SIZE,
     CANVAS_Y_SIZE,

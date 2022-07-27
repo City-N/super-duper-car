@@ -146,7 +146,7 @@ const drawBG = (
     if (moveOnBg + CANVAS_X_SIZE >= imgCity.width) {
         moveOnBg = 0;
     }
-    console.log(moveOnBg);
+    moveOnBg += 3;
 };
 
 document.addEventListener('keydown', (e: KeyboardEvent) => {
