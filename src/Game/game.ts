@@ -153,15 +153,7 @@ document.addEventListener('keydown', (e: KeyboardEvent) => {
     switch (e.key) {
         case 'w':
             KEYS.w.pressed = true;
-<<<<<<< HEAD
-            lastKey = 'w';
-            break;
-        case 'a':
-            KEYS.a.pressed = true;
-            lastKey = 'a';
-=======
             HERO_POS.y = 220;
->>>>>>> 6701ecf (фикс наслоения персонажей)
             break;
         case 's':
             KEYS.s.pressed = true;
