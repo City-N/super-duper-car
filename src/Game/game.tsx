@@ -143,7 +143,7 @@ const drawBG = (
 };
 
 document.addEventListener('keydown', (e: KeyboardEvent) => {
-    switch (e.key) {
+    switch (e.code) {
         case 'w':
             KEYS.w.pressed = true;
             HERO_POS.y = 220;
