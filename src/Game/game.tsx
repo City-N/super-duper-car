@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { throttle } from 'utils/throttle';
+import throttle from 'lodash.throttle';
 import GameBG from '../img/game_sprites/city/main.png';
 import Hero from '../img/game_sprites/truck/main/body/main.png';
 import EnemyFirst from '../img/game_sprites/truck/enemys/main.png';
@@ -23,7 +23,7 @@ const throttleEnemyMove = throttle(() => {
         moveOnEnemy = 0;
     }
     moveOnEnemy += posX;
-}, 80, null);
+}, 80);
 
 function generateRandom(): number {
     let rand = Math.random();
@@ -69,7 +69,7 @@ const throttleHeroMove = throttle(() => {
         moveOn = 0;
     }
     moveOn += posX;
-}, 80, null);
+}, 80);
 
 const drawHero = (
     ctx: CanvasRenderingContext2D,
@@ -144,12 +144,10 @@ const drawBG = (
 
 document.addEventListener('keydown', (e: KeyboardEvent) => {
     switch (e.code) {
-        case 'w':
-            KEYS.w.pressed = true;
+        case KEYS.UP:
             HERO_POS.y = 220;
             break;
-        case 's':
-            KEYS.s.pressed = true;
+        case KEYS.DOWN:
             HERO_POS.y = 260;
             break;
         default:
@@ -159,11 +157,9 @@ document.addEventListener('keydown', (e: KeyboardEvent) => {
 
 document.addEventListener('keyup', (e: KeyboardEvent) => {
     switch (e.key) {
-        case 'w':
-            KEYS.w.pressed = false;
+        case KEYS.UP:
             break;
-        case 's':
-            KEYS.s.pressed = false;
+        case KEYS.DOWN:
             break;
         default:
             break;

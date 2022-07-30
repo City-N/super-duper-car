@@ -16,18 +16,10 @@ const HERO_POS = {
 };
 
 const KEYS = {
-    w: {
-        pressed: false,
-    },
-    a: {
-        pressed: false,
-    },
-    s: {
-        pressed: false,
-    },
-    d: {
-        pressed: false,
-    },
+    UP: 'KeyW',
+    RIGHT: 'KeyD',
+    DOWN: 'KeyS',
+    LEFT: 'KeyA',
 };
 
 export {
