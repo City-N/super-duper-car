@@ -5,14 +5,18 @@ const BG_POS = {
     x: 0,
     y: 0,
     dx: 0.5,
-    dy: -2,
 };
 
 const HERO_POS = {
     x: 18,
     y: 260,
     dx: 3,
-    dy: -2,
+};
+
+const ENEMY_POS = {
+    x: CANVAS_X_SIZE + 20,
+    y: 220,
+    dx: 2,
 };
 
 const KEYS = {
@@ -27,5 +31,6 @@ export {
     CANVAS_Y_SIZE,
     BG_POS,
     HERO_POS,
+    ENEMY_POS,
     KEYS,
 };
