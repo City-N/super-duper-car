@@ -16,6 +16,7 @@ import generateRandom from './utils/generateRandom';
 
 const posBoomX = 96;
 
+let enemyCounter = 0;
 let posX = 244;
 let moveOnBg = 0;
 let moveOn = 0;
@@ -54,6 +55,7 @@ const drawEnemyFirst = (
     throttleEnemyMove();
 
     if (ENEMY_POS.x <= -(imageEnemy.width / 4)) {
+        enemyCounter += 1;
         ENEMY_POS.x = Math.floor(Math.random() * CANVAS_X_SIZE) + 1000;
         ENEMY_POS.y = generateRandom() ? 260 : 220;
     }
@@ -160,6 +162,10 @@ const drawHero = (
         posX = 244;
         ENEMY_POS.dx = 2;
         BG_POS.dx = 3;
+        // if (((enemyCounter + 1) % 4) === 0) {
+        //     ENEMY_POS.dx += 1;
+        //     BG_POS.dx += 1;
+        // }
         isCrashed = false;
     }
 };
