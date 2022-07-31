@@ -156,13 +156,14 @@ const drawHero = (
     if (isPosXHit && HERO_POS.y === ENEMY_POS.y) {
         moveOn = 0;
         moveOnEnemy = 0;
-        moveOnBg = 0;
+        BG_POS.dx = 0;
         ENEMY_POS.dx = 0;
         posX = 0;
         drawBoom(ctx, frontHeroPosX, HERO_POS.y);
     } else {
         posX = 244;
         ENEMY_POS.dx = 2;
+        BG_POS.dx = 3;
     }
 };
 
@@ -191,7 +192,7 @@ const drawBG = (
     if (moveOnBg + CANVAS_X_SIZE >= imgCity.width) {
         moveOnBg = 0;
     }
-    moveOnBg += 3;
+    moveOnBg += BG_POS.dx;
 };
 
 document.addEventListener('keydown', (e: KeyboardEvent) => {

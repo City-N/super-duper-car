@@ -11,11 +11,9 @@ const useCanvas = ({ draw }: ICanvas) => {
         const canvas = canvasRef.current;
         const context = canvas.getContext('2d');
 
-        // let frameCount = 0;
         let animationFrameId = 0;
 
         const render = () => {
-            // frameCount += 1;
             draw(context as CanvasRenderingContext2D);
             animationFrameId = window.requestAnimationFrame(render);
         };

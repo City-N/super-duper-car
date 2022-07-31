@@ -4,7 +4,7 @@ const CANVAS_Y_SIZE = 472;
 const BG_POS = {
     x: 0,
     y: 0,
-    dx: 0.5,
+    dx: 3,
 };
 
 const HERO_POS = {
