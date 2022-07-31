@@ -103,6 +103,11 @@ const throttleHeroMove = throttle(() => {
     moveOn += posX;
 }, 80);
 
+const intervalId = setInterval(() => {
+    ENEMY_POS.dx += 1;
+    BG_POS.dx += 1;
+}, 10000);
+
 const drawHero = (
     ctx: CanvasRenderingContext2D,
 ) => {
@@ -158,14 +163,9 @@ const drawHero = (
         ENEMY_POS.dx = 0;
         posX = 0;
         drawBoom(ctx, frontHeroPosX, HERO_POS.y);
+        clearInterval(intervalId);
     } else {
         posX = 244;
-        ENEMY_POS.dx = 2;
-        BG_POS.dx = 3;
-        // if (((enemyCounter + 1) % 4) === 0) {
-        //     ENEMY_POS.dx += 1;
-        //     BG_POS.dx += 1;
-        // }
         isCrashed = false;
     }
 };
