@@ -6,15 +6,14 @@ import draw from '../../Game/game';
 
 const CanvasComponent = () => {
     const canvasRef = useCanvas({ draw });
-
-    return (
+    return <>
         <canvas
             className={style.Canvas}
             ref={canvasRef}
             width={736}
             height={472}
         />
-    );
+    </>;
 };
 
 export default CanvasComponent;
