@@ -1,3 +1,5 @@
+import generateRandom from './utils/generateRandom';
+
 const CANVAS_X_SIZE = 736;
 const CANVAS_Y_SIZE = 472;
 
@@ -15,7 +17,7 @@ const HERO_POS = {
 
 const ENEMY_POS = {
     x: CANVAS_X_SIZE + 20,
-    y: 220,
+    y: generateRandom() ? 260 : 220,
     dx: 2,
 };
 
