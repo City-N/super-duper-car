@@ -12,6 +12,7 @@ import {
     CANVAS_Y_SIZE,
     KEYS,
 } from './game_constants';
+import generateRandom from './utils/generateRandom';
 
 const posBoomX = 96;
 
@@ -28,14 +29,6 @@ const throttleEnemyMove = throttle(() => {
     }
     moveOnEnemy += posX;
 }, 80);
-
-function generateRandom(): number {
-    let rand = Math.random();
-
-    rand = Math.floor(rand * 2);
-
-    return rand;
-}
 
 const drawEnemyFirst = (
     ctx: CanvasRenderingContext2D,
