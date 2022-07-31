@@ -1,0 +1,22 @@
+.Canvas {
+    width: 736px;
+    height: 472px;
+    border-radius: 32px;
+}
+
+.Stage {
+    position: relative;
+    width: 736px;
+    height: 472px;
+    margin-top: 20%;
+    border-radius: 32px;
+    outline: 4px solid #000;
+}
+
+canvas { position: absolute; }
+
+.Hero {
+    z-index: 1;
+    top: 260px;
+    left: 18px;
+}
