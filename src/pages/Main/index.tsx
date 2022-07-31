@@ -4,6 +4,9 @@ import CanvasComponent from 'components/Canvas/Canvas';
 import {
     Box, Button, Grid, Typography,
 } from '@mui/material';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import PauseIcon from '@mui/icons-material/Pause';
+import ReplayIcon from '@mui/icons-material/Replay';
 import { useAppSelector } from 'hooks/redux';
 
 const MainPage = () => {
@@ -42,7 +45,7 @@ const MainPage = () => {
                                     component="div"
                                     gutterBottom
                                 >
-                                    Привет, {first_name}
+                                    Привет, {first_name} 👋
                                 </Typography>
                                 <Typography variant='body2' component="div" gutterBottom>
                                     Управление на клавиши W и S
@@ -52,10 +55,34 @@ const MainPage = () => {
                     }
                 </Grid>
                 <Grid item xs={12}>
-                    <Button variant='contained' color='secondary' onClick={handleStart}>Start</Button>
+                    { isStarted
+                        ? <Button
+                            variant='contained'
+                            color='secondary'
+                            onClick={handleStart}
+                            startIcon={<PauseIcon />}
+                        >
+                                Пауза
+                        </Button>
+                        : <Button
+                            variant='contained'
+                            color='secondary'
+                            onClick={handleStart}
+                            startIcon={<PlayArrowIcon />}
+                        >
+                            Погнали
+                        </Button>
+                    }
                 </Grid>
                 <Grid item xs={12}>
-                    <Button variant='outlined' color='secondary' onClick={() => window.location.reload()}>Играть еще раз</Button>
+                    <Button
+                        variant='outlined'
+                        color='secondary'
+                        onClick={() => window.location.reload()}
+                        startIcon={<ReplayIcon />}
+                    >
+                        Играть еще раз
+                    </Button>
                 </Grid>
             </Grid>
         </Box>
