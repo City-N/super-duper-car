@@ -154,6 +154,7 @@ const drawHero = (
 
     const frontHeroPosX = (imagHero.width / 6) - HERO_POS.x;
     const isPosXHit = frontHeroPosX >= ENEMY_POS.x;
+
     if (isPosXHit && HERO_POS.y === ENEMY_POS.y) {
         isCrashed = true;
         moveOn = 0;
