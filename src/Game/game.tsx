@@ -186,7 +186,7 @@ const drawBG = (
         imgCity.height,
     );
 
-    if (moveOnBg + CANVAS_X_SIZE >= imgCity.width) {
+    if (moveOnBg >= imgCity.width - CANVAS_X_SIZE) {
         moveOnBg = 0;
     }
     moveOnBg += BG_POS.dx;
