@@ -12,6 +12,7 @@ import NotFoundErrorPage from 'pages/NotFoundError';
 
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import fetchUser, { showUserData } from 'store/slices/GetUserSlice';
+import Header from 'components/Header';
 
 type TOwnProps = {
     error?: Error;
@@ -48,6 +49,7 @@ export const App = () => {
 
     return (
         <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Header />
             <Switch>
                 <Route exact path="/" component={MainPage} />
                 <Route path="/sign_in" component={SignInPage} />

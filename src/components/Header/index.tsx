@@ -49,7 +49,7 @@ export default function Header() {
 
     return (
         <AppBar
-            position="static"
+            position="sticky"
             sx={{ backgroundColor: 'white', boxShadow: '0px -2px 10px black' }}
         >
             <Container maxWidth="xl">
