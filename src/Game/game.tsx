@@ -7,6 +7,7 @@ import BoomEffect from '../img/game_sprites/boom/boom.png';
 import {
     BG_POS,
     HERO_POS,
+    ENEMY_POS,
     CANVAS_X_SIZE,
     CANVAS_Y_SIZE,
     KEYS,
@@ -16,8 +17,6 @@ const posBoomX = 96;
 
 let posX = 244;
 let moveOnBg = 0;
-let enemPosX = CANVAS_X_SIZE + 20;
-let enemPosY = 220;
 let moveOn = 0;
 let moveOnEnemy = 0;
 let boomOnEffect = 0;
@@ -53,19 +52,19 @@ const drawEnemyFirst = (
         0,
         imageEnemy.width / 4,
         imageEnemy.height,
-        enemPosX,
-        enemPosY,
+        ENEMY_POS.x,
+        ENEMY_POS.y,
         imageEnemy.width / 4,
         imageEnemy.height,
     );
     throttleEnemyMove();
 
-    if (enemPosX <= -(imageEnemy.width / 4)) {
-        enemPosX = Math.floor(Math.random() * CANVAS_X_SIZE) + 1000;
-        enemPosY = generateRandom() ? 260 : 220;
+    if (ENEMY_POS.x <= -(imageEnemy.width / 4)) {
+        ENEMY_POS.x = Math.floor(Math.random() * CANVAS_X_SIZE) + 1000;
+        ENEMY_POS.y = generateRandom() ? 260 : 220;
     }
 
-    enemPosX -= 2;
+    ENEMY_POS.x -= ENEMY_POS.dx;
 };
 
 const throttleBoomEffect = throttle(() => {
@@ -114,12 +113,15 @@ const drawHero = (
     const imagHero = new Image();
     imagHero.src = Hero;
 
+    const imageEnemy = new Image();
+    imageEnemy.src = EnemyFirst;
+
     imagHero.onload = () => {
         ctx.clearRect(0, 0, CANVAS_X_SIZE, CANVAS_Y_SIZE);
         ctx.drawImage(imagHero, HERO_POS.x, HERO_POS.y);
     };
 
-    if (enemPosY === 260) {
+    if (ENEMY_POS.y === 260) {
         ctx.drawImage(
             imagHero,
             moveOn,
@@ -150,16 +152,17 @@ const drawHero = (
     }
 
     const frontHeroPosX = (imagHero.width / 6) - HERO_POS.x;
-    const isPosXHit = frontHeroPosX >= enemPosX;
-    if (isPosXHit && HERO_POS.y === enemPosY) {
+    const isPosXHit = frontHeroPosX >= ENEMY_POS.x;
+    if (isPosXHit && HERO_POS.y === ENEMY_POS.y) {
         moveOn = 0;
         moveOnEnemy = 0;
         moveOnBg = 0;
-        enemPosX = frontHeroPosX;
+        ENEMY_POS.dx = 0;
         posX = 0;
         drawBoom(ctx, frontHeroPosX, HERO_POS.y);
     } else {
         posX = 244;
+        ENEMY_POS.dx = 2;
     }
 };
 
