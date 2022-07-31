@@ -20,6 +20,7 @@ let moveOnBg = 0;
 let moveOn = 0;
 let moveOnEnemy = 0;
 let boomOnEffect = 0;
+let isCrashed = false;
 
 const throttleEnemyMove = throttle(() => {
     if (moveOnEnemy >= 732) {
@@ -154,6 +155,7 @@ const drawHero = (
     const frontHeroPosX = (imagHero.width / 6) - HERO_POS.x;
     const isPosXHit = frontHeroPosX >= ENEMY_POS.x;
     if (isPosXHit && HERO_POS.y === ENEMY_POS.y) {
+        isCrashed = true;
         moveOn = 0;
         moveOnEnemy = 0;
         BG_POS.dx = 0;
@@ -164,6 +166,7 @@ const drawHero = (
         posX = 244;
         ENEMY_POS.dx = 2;
         BG_POS.dx = 3;
+        isCrashed = false;
     }
 };
 
@@ -195,13 +198,21 @@ const drawBG = (
     moveOnBg += BG_POS.dx;
 };
 
+const keyPressEvent = (e: KeyboardEvent, value: number) => {
+    if (!isCrashed) {
+        HERO_POS.y = value;
+    } else {
+        e.preventDefault();
+    }
+};
+
 document.addEventListener('keydown', (e: KeyboardEvent) => {
     switch (e.code) {
         case KEYS.UP:
-            HERO_POS.y = 220;
+            keyPressEvent(e, 220);
             break;
         case KEYS.DOWN:
-            HERO_POS.y = 260;
+            keyPressEvent(e, 260);
             break;
         default:
             break;
