@@ -3,6 +3,7 @@ import throttle from 'lodash.throttle';
 import GameBG from '../img/game_sprites/city/main.png';
 import Hero from '../img/game_sprites/truck/main/body/main.png';
 import EnemyFirst from '../img/game_sprites/truck/enemys/main.png';
+import BoomEffect from '../img/game_sprites/boom/boom.png';
 import {
     BG_POS,
     HERO_POS,
@@ -11,12 +12,15 @@ import {
     KEYS,
 } from './game_constants';
 
-const posX = 244;
+const posBoomX = 96;
 
+let posX = 244;
+let moveOnBg = 0;
 let enemPosX = CANVAS_X_SIZE + 20;
 let enemPosY = 220;
 let moveOn = 0;
 let moveOnEnemy = 0;
+let boomOnEffect = 0;
 
 const throttleEnemyMove = throttle(() => {
     if (moveOnEnemy >= 732) {
@@ -62,6 +66,39 @@ const drawEnemyFirst = (
     }
 
     enemPosX -= 2;
+};
+
+const throttleBoomEffect = throttle(() => {
+    if (boomOnEffect >= 1152) {
+        boomOnEffect = 0;
+    }
+    boomOnEffect += posBoomX;
+}, 80);
+
+const drawBoom = (
+    ctx: CanvasRenderingContext2D,
+    X: number,
+    Y: number,
+) => {
+    const imageBoom = new Image();
+    imageBoom.src = BoomEffect;
+
+    imageBoom.onload = () => {
+        ctx.clearRect(0, 0, CANVAS_X_SIZE, CANVAS_Y_SIZE);
+    };
+
+    ctx.drawImage(
+        imageBoom,
+        boomOnEffect,
+        0,
+        imageBoom.width / 12,
+        imageBoom.height,
+        X,
+        Y,
+        imageBoom.width / 12,
+        imageBoom.height,
+    );
+    throttleBoomEffect();
 };
 
 const throttleHeroMove = throttle(() => {
@@ -111,9 +148,21 @@ const drawHero = (
         );
         throttleHeroMove();
     }
+
+    const frontHeroPosX = (imagHero.width / 6) - HERO_POS.x;
+    const isPosXHit = frontHeroPosX >= enemPosX;
+    if (isPosXHit && HERO_POS.y === enemPosY) {
+        moveOn = 0;
+        moveOnEnemy = 0;
+        moveOnBg = 0;
+        enemPosX = frontHeroPosX;
+        posX = 0;
+        drawBoom(ctx, frontHeroPosX, HERO_POS.y);
+    } else {
+        posX = 244;
+    }
 };
 
-let moveOnBg = 0;
 const drawBG = (
     ctx: CanvasRenderingContext2D,
 ) => {
