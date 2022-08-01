@@ -70,13 +70,12 @@ const SignUpPage = () => {
             password: '',
             phone: '',
         },
-        validationSchema: validationSchema,
-        onSubmit: (values: ISignUp) =>
-            signup(values).then((payload) => {
-                if (payload.status === 200) {
-                    history.push('/sign_in');
-                }
-            }),
+        validationSchema,
+        onSubmit: (values: ISignUp) => signup(values).then(payload => {
+            if (payload.status === 200) {
+                history.push('/sign_in');
+            }
+        }),
     });
 
     return (
@@ -114,12 +113,12 @@ const SignUpPage = () => {
                                     value={formik.values.first_name}
                                     onChange={formik.handleChange}
                                     helperText={
-                                        formik.touched.first_name &&
-                                        formik.errors.first_name
+                                        formik.touched.first_name
+                                        && formik.errors.first_name
                                     }
                                     error={
-                                        Boolean(formik.touched.first_name) &&
-                                        Boolean(formik.errors.first_name)
+                                        Boolean(formik.touched.first_name)
+                                        && Boolean(formik.errors.first_name)
                                     }
                                     sx={{
                                         paddingBottom: '16px',
@@ -134,12 +133,12 @@ const SignUpPage = () => {
                                     value={formik.values.second_name}
                                     onChange={formik.handleChange}
                                     helperText={
-                                        formik.touched.second_name &&
-                                        formik.errors.second_name
+                                        formik.touched.second_name
+                                        && formik.errors.second_name
                                     }
                                     error={
-                                        Boolean(formik.touched.second_name) &&
-                                        Boolean(formik.errors.second_name)
+                                        Boolean(formik.touched.second_name)
+                                        && Boolean(formik.errors.second_name)
                                     }
                                     sx={{
                                         paddingBottom: '16px',
@@ -157,8 +156,8 @@ const SignUpPage = () => {
                                         formik.touched.login && formik.errors.login
                                     }
                                     error={
-                                        Boolean(formik.touched.login) &&
-                                        Boolean(formik.errors.login)
+                                        Boolean(formik.touched.login)
+                                        && Boolean(formik.errors.login)
                                     }
                                     sx={{
                                         paddingBottom: '16px',
@@ -176,8 +175,8 @@ const SignUpPage = () => {
                                         formik.touched.email && formik.errors.email
                                     }
                                     error={
-                                        Boolean(formik.touched.email) &&
-                                        Boolean(formik.errors.email)
+                                        Boolean(formik.touched.email)
+                                        && Boolean(formik.errors.email)
                                     }
                                     sx={{
                                         paddingBottom: '16px',
@@ -196,8 +195,8 @@ const SignUpPage = () => {
                                         formik.touched.password && formik.errors.password
                                     }
                                     error={
-                                        Boolean(formik.touched.password) &&
-                                        Boolean(formik.errors.password)
+                                        Boolean(formik.touched.password)
+                                        && Boolean(formik.errors.password)
                                     }
                                     sx={{
                                         width: '100%',
@@ -213,8 +212,8 @@ const SignUpPage = () => {
                                         formik.touched.phone && formik.errors.phone
                                     }
                                     error={
-                                        Boolean(formik.touched.phone) &&
-                                        Boolean(formik.errors.phone)
+                                        Boolean(formik.touched.phone)
+                                        && Boolean(formik.errors.phone)
                                     }
                                     value={formik.values.phone}
                                     onChange={formik.handleChange}
