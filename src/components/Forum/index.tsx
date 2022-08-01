@@ -4,8 +4,8 @@ import ListItem from '@mui/material/ListItem';
 import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
 import FolderIcon from '@mui/icons-material/Folder';
+import { Avatars } from 'components/Avatars';
 
 export default function ForumList() {
     return (
@@ -19,7 +19,7 @@ export default function ForumList() {
                     secondary=" — I'll be in your neighborhood doing errands this…"
                 />
                 <ListItemAvatar>
-                    <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                    <Avatars text="Remy Sharp" />
                 </ListItemAvatar>
             </ListItem>
             <Divider variant="inset" component="li" />
@@ -32,7 +32,7 @@ export default function ForumList() {
                     secondary=" — I'll be in your neighborhood doing errands this…"
                 />
                 <ListItemAvatar>
-                    <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                    <Avatars text="Remy Sharp" />
                 </ListItemAvatar>
             </ListItem>
         </List>
