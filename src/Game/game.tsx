@@ -106,10 +106,10 @@ const throttleHeroMove = throttle(() => {
     moveOn += posX;
 }, 80);
 
-const intervalId = setInterval(() => {
+let intervalId = setInterval(() => {
     ENEMY_POS.dx += 1;
     BG_POS.dx += 1;
-}, 10000);
+}, 5000);
 
 const drawHero = (
     ctx: CanvasRenderingContext2D,
@@ -241,7 +241,6 @@ const draw = (
     // Сброс состояния игры
     if (isRefrashed) {
         setRefrashed(!isRefrashed);
-        isRefrashed = false;
         isCrashed = false;
         // enemyCounter = 0; soon
         posX = 244;
@@ -258,6 +257,10 @@ const draw = (
         moveOnEnemy = 0;
         boomOnEffect = 0;
         clearInterval(intervalId);
+        intervalId = setInterval(() => {
+            ENEMY_POS.dx += 1;
+            BG_POS.dx += 1;
+        }, 5000);
     }
 
     drawBG(ctx);
