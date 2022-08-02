@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import CanvasComponent from 'components/Canvas/Canvas';
 import {
     Box, Button, Grid, Typography,
@@ -11,43 +11,9 @@ import { useAppSelector } from 'hooks/redux';
 
 const MainPage = () => {
     const [isStarted, setStarted] = useState<boolean>(() => false);
-    const [isFullscreen, setIsFullscreen] = useState<boolean>(() => false);
-    const [fullScreenText, setFullScreenText] = useState<string>('На весь экран');
     const { first_name } = useAppSelector(state => state.user.data);
 
-    const toggler = document.getElementById('game');
-
     const handleStart = () => setStarted(!isStarted);
-
-    const handleActivateFullscreen = (element: HTMLElement) => {
-        setIsFullscreen(!isFullscreen);
-        if (element.requestFullscreen) {
-            element.requestFullscreen();
-        }
-    };
-
-    const handleDeactivateFullscreen = () => {
-        setIsFullscreen(!isFullscreen);
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        }
-    };
-
-    useEffect(() => {
-        const { fullscreenElement } = document;
-
-        const onFullscreenChange = () => {
-            if (!fullscreenElement) {
-                setFullScreenText('Свернуть');
-            } else {
-                setFullScreenText('На весь экран');
-            }
-        };
-
-        document.addEventListener('fullscreenchange', onFullscreenChange);
-
-        return () => document.removeEventListener('fullscreenchange', onFullscreenChange);
-    }, [isFullscreen]);
 
     return (
         <Box
@@ -108,24 +74,6 @@ const MainPage = () => {
                             startIcon={<PlayArrowIcon />}
                         >
                             Погнали
-                        </Button>
-                    }
-                </Grid>
-                <Grid item xs={12}>
-                    { !isFullscreen
-                        ? <Button
-                            variant='outlined'
-                            color='secondary'
-                            onClick={() => handleActivateFullscreen(toggler as HTMLElement)}
-                        >
-                            {fullScreenText}
-                        </Button>
-                        : <Button
-                            variant='outlined'
-                            color='secondary'
-                            onClick={handleDeactivateFullscreen}
-                        >
-                            {fullScreenText}
                         </Button>
                     }
                 </Grid>
