@@ -15,7 +15,7 @@ const initialState: IGetUserState = {
     isLoading: false,
     data: {
         id: 0,
-        display_name: 'test',
+        display_name: '',
         avatar: '',
         first_name: '',
         second_name: '',
