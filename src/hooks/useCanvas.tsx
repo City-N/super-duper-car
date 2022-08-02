@@ -1,32 +1,34 @@
-import { useRef, useEffect, MutableRefObject } from 'react';
+import {
+    useState, useRef, useEffect, MutableRefObject, SetStateAction, Dispatch,
+} from 'react';
+import draw from '../Game/game';
 
-interface ICanvas {
-    draw: (ctx: CanvasRenderingContext2D, canvas?: HTMLCanvasElement) => void
-}
-
-const useCanvas = ({ draw }: ICanvas) => {
+const useCanvas = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null) as MutableRefObject<HTMLCanvasElement>;
+    const [isRefrashed, setRefrashed] = useState<boolean>(false);
+
+    const { requestAnimationFrame, cancelAnimationFrame } = window;
 
     useEffect(() => {
         const canvas = canvasRef.current;
         const context = canvas.getContext('2d');
 
-        // let frameCount = 0;
         let animationFrameId = 0;
 
         const render = () => {
-            // frameCount += 1;
-            draw(context as CanvasRenderingContext2D);
-            animationFrameId = window.requestAnimationFrame(render);
+            draw(context as CanvasRenderingContext2D, isRefrashed, setRefrashed);
+            animationFrameId = requestAnimationFrame(render);
         };
         render();
 
-        return () => {
-            window.cancelAnimationFrame(animationFrameId);
-        };
-    }, [draw]);
+        return () => cancelAnimationFrame(animationFrameId);
+    });
 
-    return canvasRef;
+    return [canvasRef, isRefrashed, setRefrashed] as [
+        MutableRefObject<HTMLCanvasElement>,
+        boolean,
+        Dispatch<SetStateAction<boolean>>
+    ];
 };
 
 export default useCanvas;

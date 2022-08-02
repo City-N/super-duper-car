@@ -49,7 +49,7 @@ export default function Header() {
 
     return (
         <AppBar
-            position="static"
+            position="sticky"
             sx={{ backgroundColor: 'white', boxShadow: '0px -2px 10px black' }}
         >
             <Container maxWidth="xl">
@@ -62,9 +62,7 @@ export default function Header() {
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
-                            fontFamily: 'monospace',
                             fontWeight: 700,
-                            letterSpacing: '.3rem',
                             color: 'inherit',
                             textDecoration: 'none',
                         }}
