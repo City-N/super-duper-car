@@ -10,7 +10,7 @@ import ReplayIcon from '@mui/icons-material/Replay';
 import { useAppSelector } from 'hooks/redux';
 
 const MainPage = () => {
-    const [isStarted, setStarted] = useState<boolean>(() => false);
+    const [isStarted, setStarted] = useState<boolean>(false);
     const { first_name } = useAppSelector(state => state.user.data);
 
     const handleStart = () => setStarted(!isStarted);
