@@ -261,7 +261,7 @@ const draw = (
     }
 
     drawBG(ctx);
-    drawHero(ctx, isRefrashed);
+    drawHero(ctx);
 };
 
 export default draw;
