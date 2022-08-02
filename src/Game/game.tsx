@@ -113,7 +113,6 @@ const intervalId = setInterval(() => {
 
 const drawHero = (
     ctx: CanvasRenderingContext2D,
-    isRefrashed: boolean,
 ) => {
     const imagHero = new Image();
     imagHero.src = Hero;
