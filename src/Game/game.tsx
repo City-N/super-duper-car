@@ -1,4 +1,7 @@
 /* eslint-disable no-param-reassign */
+import {
+    SetStateAction, Dispatch,
+} from 'react';
 import throttle from 'lodash.throttle';
 import GameBG from '../img/game_sprites/city/main.png';
 import Hero from '../img/game_sprites/truck/main/body/main.png';
@@ -16,7 +19,7 @@ import generateRandom from './utils/generateRandom';
 
 const posBoomX = 96;
 
-// let enemyCounter = 0;
+// let enemyCounter = 0; soon
 let posX = 244;
 let moveOnBg = 0;
 let moveOn = 0;
@@ -55,7 +58,7 @@ const drawEnemyFirst = (
     throttleEnemyMove();
 
     if (ENEMY_POS.x <= -(imageEnemy.width / 4)) {
-        // enemyCounter += 1;
+        // enemyCounter += 1; soon
         ENEMY_POS.x = Math.floor(Math.random() * CANVAS_X_SIZE) + 1000;
         ENEMY_POS.y = generateRandom() ? 260 : 220;
     }
@@ -110,6 +113,7 @@ const intervalId = setInterval(() => {
 
 const drawHero = (
     ctx: CanvasRenderingContext2D,
+    isRefrashed: boolean,
 ) => {
     const imagHero = new Image();
     imagHero.src = Hero;
@@ -230,9 +234,35 @@ document.addEventListener('keyup', (e: KeyboardEvent) => {
     }
 });
 
-const draw = (ctx: CanvasRenderingContext2D) => {
+const draw = (
+    ctx: CanvasRenderingContext2D,
+    isRefrashed: boolean,
+    setRefrashed: Dispatch<SetStateAction<boolean>>,
+) => {
+    // Сброс состояния игры
+    if (isRefrashed) {
+        setRefrashed(!isRefrashed);
+        isRefrashed = false;
+        isCrashed = false;
+        // enemyCounter = 0; soon
+        posX = 244;
+        ENEMY_POS.dx = 2;
+        ENEMY_POS.x = CANVAS_X_SIZE + 20;
+        ENEMY_POS.y = generateRandom() ? 260 : 220;
+        BG_POS.dx = 3;
+        BG_POS.x = 0;
+        BG_POS.y = 0;
+        HERO_POS.y = 260;
+        HERO_POS.dx = 3;
+        moveOnBg = 0;
+        moveOn = 0;
+        moveOnEnemy = 0;
+        boomOnEffect = 0;
+        clearInterval(intervalId);
+    }
+
     drawBG(ctx);
-    drawHero(ctx);
+    drawHero(ctx, isRefrashed);
 };
 
 export default draw;

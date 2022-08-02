@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import React, { useState } from 'react';
 import CanvasComponent from 'components/Canvas/Canvas';
 import {
@@ -6,12 +5,13 @@ import {
 } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
-import ReplayIcon from '@mui/icons-material/Replay';
 import { useAppSelector } from 'hooks/redux';
+import { showUserData } from 'store/slices/GetUserSlice';
 
 const MainPage = () => {
     const [isStarted, setStarted] = useState<boolean>(false);
-    const { first_name } = useAppSelector(state => state.user.data);
+    // eslint-disable-next-line camelcase
+    const { data: { first_name: firstName } } = useAppSelector(showUserData);
 
     const handleStart = () => setStarted(!isStarted);
 
@@ -48,7 +48,7 @@ const MainPage = () => {
                                     component="div"
                                     gutterBottom
                                 >
-                                    Привет, {first_name} 👋
+                                    Привет, {firstName} 👋
                                 </Typography>
                                 <Typography variant='body2' component="div" gutterBottom>
                                     Управление на клавиши W и S
@@ -76,16 +76,6 @@ const MainPage = () => {
                             Погнали
                         </Button>
                     }
-                </Grid>
-                <Grid item xs={12}>
-                    <Button
-                        variant='outlined'
-                        color='secondary'
-                        onClick={() => window.location.reload()}
-                        startIcon={<ReplayIcon />}
-                    >
-                        Играть еще раз
-                    </Button>
                 </Grid>
             </Grid>
         </Box>
