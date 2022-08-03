@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import {
     Button,
     Card,
+    CardMedia,
     CardActions,
     CardContent,
     TextField,
@@ -16,10 +17,10 @@ import colors from 'colors';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link as RouterLink } from 'react-router-dom';
 import theme from 'theme';
-import { updateProfile, updateAvatar, getAvatar } from 'API/UserApi';
-import { useAppSelector } from 'hooks/redux';
-import { showUserData } from 'store/slices/GetUserSlice';
-import { AVATAR_URL } from 'constants/constants';
+import { updateProfile, updateAvatar } from 'API/UserApi';
+import { useAppSelector, useAppDispatch } from 'hooks/redux';
+import fetchUser, { showUserData } from 'store/slices/GetUserSlice';
+import { GET_AVATAR_URL } from 'constants/constants';
 import edit from '../../img/edit.svg';
 import noavatar from '../../img/noavatar.svg';
 
@@ -36,15 +37,33 @@ interface IProfile {
     avatar: string;
 }
 
+type TAvatar = {
+    lastModified: number;
+    name: string;
+    size: number;
+    type: string;
+    webkitRelativePath: string;
+};
+
 const Profile = () => {
+    const dispatch = useAppDispatch();
     const { data } = useAppSelector(showUserData);
-    // const [avatar, setAvatar] = useState<string>('');
+    const [avatar, setAvatar] = useState<TAvatar | null>(null);
+    const [selectedFile, setSelectedFile] = useState<Blob | MediaSource | null>();
+    const [preview, setPreview] = useState<string | undefined>();
 
-    // useEffect(() => {
-    //     getAvatar(data.avatar).then(({ data }) => setAvatar(data));
-    // });
+    useEffect(() => {
+        if (!selectedFile) {
+            setPreview(undefined);
+            return;
+        }
 
-    // console.log(JSON.stringify(avatar));
+        const objectUrl = URL.createObjectURL(selectedFile);
+        setPreview(objectUrl);
+
+        // eslint-disable-next-line consistent-return
+        return () => URL.revokeObjectURL(objectUrl);
+    }, [selectedFile]);
 
     const formik = useFormik({
         enableReinitialize: true,
@@ -61,8 +80,10 @@ const Profile = () => {
             const formData = new FormData();
             formData.append('avatar', values.avatar);
 
-            updateProfile(values);
-            updateAvatar(formData)
+            updateProfile(values)
+                .then(() => updateAvatar(formData))
+                .then(() => dispatch(fetchUser()))
+                .then(() => setAvatar(null))
                 .then(() => setSubmitting(false))
                 .catch(() => setSubmitting(false));
         },
@@ -116,6 +137,7 @@ const Profile = () => {
                                                             display: 'flex',
                                                             alignItems: 'center',
                                                             justifyContent: 'center',
+                                                            flexDirection: 'column',
                                                             height: '100%',
                                                         }}
                                                     >
@@ -162,8 +184,10 @@ const Profile = () => {
                                                                     top: 0,
                                                                     opacity: 0,
                                                                 }}
-                                                                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                                                                    formik.setFieldValue('avatar', event.target.files[0]);
+                                                                onChange={event => {
+                                                                    formik.setFieldValue('avatar', event.target.files?.[0] || null);
+                                                                    setAvatar(event.target.files?.[0] || null);
+                                                                    setSelectedFile(event.target.files?.[0] || null);
                                                                 }}
                                                                 type="file"
                                                                 id="avatar"
@@ -180,12 +204,35 @@ const Profile = () => {
                                                                     height: '100%',
                                                                 }}
                                                                 src={
-                                                                    formik.values.avatar.length
-                                                                        ? `https://ya-praktikum.tech/api/v2/resources/${formik.values.avatar}`
+                                                                    data.avatar.length
+                                                                        ? `${GET_AVATAR_URL}/${data.avatar}`
                                                                         : noavatar
                                                                 }
                                                                 alt="Аватар"
                                                             />
+                                                        </Box>
+                                                        <Box>
+                                                            {avatar
+                                                                ? (
+                                                                    <Card sx={{ maxWidth: 345 }} variant="outlined">
+                                                                        <CardMedia
+                                                                            component="img"
+                                                                            height="140"
+                                                                            src={preview as string}
+                                                                            alt="Новый аватар"
+                                                                        />
+                                                                        <CardContent>
+                                                                            <Typography gutterBottom variant="h5" component="div">
+                                                                                Загружаемый аватар
+                                                                            </Typography>
+                                                                            <Typography variant="body2" color="text.secondary">
+                                                                                {`${avatar.name} - ${(avatar.size / 1024 ** 2).toFixed(2)} MB`}
+                                                                            </Typography>
+                                                                        </CardContent>
+                                                                    </Card>
+                                                                )
+                                                                : null
+                                                            }
                                                         </Box>
                                                     </Box>
                                                 </CardContent>

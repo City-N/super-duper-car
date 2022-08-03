@@ -1,5 +1,5 @@
 import {
-    AVATAR_URL, GET_AVATAR_URL, GET_PROFILE_URL, GET_USER_URL, UPDATE_PROFILE_URL,
+    AVATAR_URL, GET_PROFILE_URL, GET_USER_URL, UPDATE_PROFILE_URL,
 } from 'constants/constants';
 import { AxiosInstance } from './AxiosInstance';
 
@@ -10,8 +10,7 @@ const updateProfile = <T>(data: T) => AxiosInstance.put<string>(UPDATE_PROFILE_U
 const getProfile = <T>(data: T) => AxiosInstance.get<string>(`${GET_PROFILE_URL}/${data}`, data);
 
 const updateAvatar = <T>(data: T) => AxiosInstance.put<string>(AVATAR_URL, data);
-const getAvatar = <T>(data: T) => AxiosInstance.get<string>(`${GET_AVATAR_URL}/${data}`);
 
 export {
-    getUser, updateProfile, getProfile, updateAvatar, getAvatar,
+    getUser, updateProfile, getProfile, updateAvatar,
 };
