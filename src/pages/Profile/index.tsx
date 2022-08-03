@@ -112,13 +112,13 @@ const Profile = () => {
                                     padding: 0,
                                 }}
                             >
-                                <Box sx={{ width: '100%' }}>
+                                <Box sx={{ maxWidth: 1200 }}>
                                     <Grid
                                         container
                                         rowSpacing={1}
                                         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
                                     >
-                                        <Grid item xs={6}>
+                                        <Grid item xs={4}>
                                             <Card
                                                 sx={{
                                                     borderRadius: '32px',
@@ -148,8 +148,8 @@ const Profile = () => {
                                                                 display: 'block',
                                                                 cursor: 'pointer',
                                                                 margin: 'auto',
-                                                                width: 128,
-                                                                height: 128,
+                                                                width: 256,
+                                                                height: 256,
                                                                 borderRadius: 65,
                                                                 ':hover:after': {
                                                                     position: 'absolute',
@@ -238,7 +238,7 @@ const Profile = () => {
                                                 </CardContent>
                                             </Card>
                                         </Grid>
-                                        <Grid item xs={6}>
+                                        <Grid item xs={8}>
                                             <Typography variant="h1" padding="0 0 32px 0">
                                                 Привет, {formik.values.first_name} 🤘
                                             </Typography>
@@ -319,7 +319,7 @@ const Profile = () => {
                                                 }}
                                             >
                                                 <Grid container spacing={2}>
-                                                    <Grid item xs={12}>
+                                                    <Grid item xs={3}>
                                                         <Button
                                                             variant="contained"
                                                             type="submit"
