@@ -106,6 +106,7 @@ const Profile = () => {
                                 borderRadius: '32px',
                                 padding: '40px 24px',
                             }}
+                            variant='outlined'
                         >
                             <CardContent
                                 sx={{
@@ -336,7 +337,7 @@ const Profile = () => {
                                                                 color={colors.white}
                                                                 fontWeight="bold"
                                                             >
-                                                                Сохранить!
+                                                                Сохранить
                                                             </Typography>
                                                         </Button>
                                                     </Grid>
