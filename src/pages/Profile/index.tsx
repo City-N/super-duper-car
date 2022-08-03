@@ -168,7 +168,7 @@ const Profile = () => {
                                                                         'no-repeat',
                                                                     backgroundPosition:
                                                                         'center',
-                                                                    backgroundSize: 24,
+                                                                    backgroundSize: 40,
                                                                     borderRadius: 65,
                                                                 },
                                                             }}
