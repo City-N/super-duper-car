@@ -5,6 +5,8 @@ export const SIGNIN_URL = '/auth/signin';
 export const LOGOUT_URL = '/auth/logout';
 export const GET_USER_URL = '/auth/user';
 export const SIGNUP_URL = '/auth/signup';
+export const UPDATE_PROFILE_URL = '/user/profile';
+export const GET_PROFILE_URL = '/user';
 
 // REGEX
 export const REGEX_LOGIN = '^[-A-Za-z0-9_-]{3,16}$';

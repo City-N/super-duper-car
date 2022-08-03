@@ -1,6 +1,12 @@
 import axios from 'axios';
 import {
-    SIGNIN_URL, LOGOUT_URL, SIGNUP_URL, GET_USER_URL, API_URL,
+    SIGNIN_URL,
+    LOGOUT_URL,
+    SIGNUP_URL,
+    GET_USER_URL,
+    API_URL,
+    GET_PROFILE_URL,
+    UPDATE_PROFILE_URL,
 } from 'constants/constants';
 
 interface ISignIn {
@@ -36,15 +42,16 @@ const AxiosInstance = axios.create({
 
 const login = <T>(data: T) => AxiosInstance.post<string>(SIGNIN_URL, data);
 
+const updateProfile = <T>(data: T) => AxiosInstance.put<string>(UPDATE_PROFILE_URL, data);
+
+const getProfile = <T>(data: T) => AxiosInstance.get<string>(`${GET_PROFILE_URL}/${data}`, data);
+
 const logout = () => AxiosInstance.post(LOGOUT_URL);
 
-const signup = <T>(data: T) => AxiosInstance.post<Record<string, number>>(
-    SIGNUP_URL,
-    data,
-);
+const signup = <T>(data: T) => AxiosInstance.post<Record<string, number>>(SIGNUP_URL, data);
 
 const getUser = () => AxiosInstance.get(GET_USER_URL);
 
 export {
-    login, logout, signup, getUser, ISignIn, ISignUp, IUser,
+    login, logout, signup, getUser, ISignIn, ISignUp, IUser, updateProfile, getProfile,
 };
