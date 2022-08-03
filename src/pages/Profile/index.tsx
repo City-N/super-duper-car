@@ -176,8 +176,8 @@ const Profile = () => {
                                                             <input
                                                                 style={{
                                                                     overflow: 'hidden',
-                                                                    width: 128,
-                                                                    height: 128,
+                                                                    width: 256,
+                                                                    height: 256,
                                                                     zIndex: 2,
                                                                     cursor: 'pointer',
                                                                     position: 'absolute',
