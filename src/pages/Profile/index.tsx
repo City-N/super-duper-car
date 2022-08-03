@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable max-len */
+import React, { useState, useEffect } from 'react';
 import {
     Button,
     Card,
@@ -15,9 +16,10 @@ import colors from 'colors';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link as RouterLink } from 'react-router-dom';
 import theme from 'theme';
-import { updateProfile } from 'API/AuthApi';
+import { updateProfile, updateAvatar, getAvatar } from 'API/UserApi';
 import { useAppSelector } from 'hooks/redux';
 import { showUserData } from 'store/slices/GetUserSlice';
+import { AVATAR_URL } from 'constants/constants';
 import edit from '../../img/edit.svg';
 import noavatar from '../../img/noavatar.svg';
 
@@ -31,12 +33,21 @@ interface IProfile {
     phone: string;
     // eslint-disable-next-line camelcase
     display_name: string;
+    avatar: string;
 }
 
 const Profile = () => {
     const { data } = useAppSelector(showUserData);
+    // const [avatar, setAvatar] = useState<string>('');
+
+    // useEffect(() => {
+    //     getAvatar(data.avatar).then(({ data }) => setAvatar(data));
+    // });
+
+    // console.log(JSON.stringify(avatar));
 
     const formik = useFormik({
+        enableReinitialize: true,
         initialValues: {
             first_name: data.first_name,
             second_name: data.second_name,
@@ -44,10 +55,17 @@ const Profile = () => {
             email: data.email,
             phone: data.phone,
             display_name: data.display_name,
+            avatar: data.avatar,
         },
-        onSubmit: (values: IProfile, { setSubmitting }) => updateProfile(values)
-            .then(() => setSubmitting(false))
-            .catch(() => setSubmitting(false)),
+        onSubmit: (values: IProfile, { setSubmitting }) => {
+            const formData = new FormData();
+            formData.append('avatar', values.avatar);
+
+            updateProfile(values);
+            updateAvatar(formData)
+                .then(() => setSubmitting(false))
+                .catch(() => setSubmitting(false));
+        },
     });
 
     return (
@@ -144,6 +162,9 @@ const Profile = () => {
                                                                     top: 0,
                                                                     opacity: 0,
                                                                 }}
+                                                                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                                                                    formik.setFieldValue('avatar', event.target.files[0]);
+                                                                }}
                                                                 type="file"
                                                                 id="avatar"
                                                                 name="avatar"
@@ -158,7 +179,11 @@ const Profile = () => {
                                                                     width: '100%',
                                                                     height: '100%',
                                                                 }}
-                                                                src={noavatar}
+                                                                src={
+                                                                    formik.values.avatar.length
+                                                                        ? `https://ya-praktikum.tech/api/v2/resources/${formik.values.avatar}`
+                                                                        : noavatar
+                                                                }
                                                                 alt="Аватар"
                                                             />
                                                         </Box>
@@ -224,6 +249,18 @@ const Profile = () => {
                                                 name="phone"
                                                 variant="outlined"
                                                 value={formik.values.phone}
+                                                onChange={formik.handleChange}
+                                                sx={{
+                                                    paddingBottom: '16px',
+                                                    width: '100%',
+                                                }}
+                                            />
+                                            <TextField
+                                                id="display_name"
+                                                label="Имя в чате"
+                                                name="display_name"
+                                                variant="outlined"
+                                                value={formik.values.display_name}
                                                 onChange={formik.handleChange}
                                                 sx={{
                                                     width: '100%',

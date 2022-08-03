@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getUser } from 'API/AuthApi';
+import { getUser } from 'API/UserApi';
 
 export const fetchUser = createAsyncThunk(
     'user/fetchAll',
