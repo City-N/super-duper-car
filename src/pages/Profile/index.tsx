@@ -246,7 +246,7 @@ const Profile = () => {
                                                 id="first_name"
                                                 label="Имя"
                                                 name="first_name"
-                                                variant="outlined"
+                                                variant="standard"
                                                 value={formik.values.first_name}
                                                 onChange={formik.handleChange}
                                                 sx={{
@@ -258,7 +258,7 @@ const Profile = () => {
                                                 id="second_name"
                                                 label="Фамилия"
                                                 name="second_name"
-                                                variant="outlined"
+                                                variant="standard"
                                                 value={formik.values.second_name}
                                                 onChange={formik.handleChange}
                                                 sx={{
@@ -270,7 +270,7 @@ const Profile = () => {
                                                 id="login"
                                                 label="Логин"
                                                 name="login"
-                                                variant="outlined"
+                                                variant="standard"
                                                 value={formik.values.login}
                                                 onChange={formik.handleChange}
                                                 sx={{
@@ -282,7 +282,7 @@ const Profile = () => {
                                                 id="email"
                                                 label="Email"
                                                 name="email"
-                                                variant="outlined"
+                                                variant="standard"
                                                 value={formik.values.email}
                                                 onChange={formik.handleChange}
                                                 sx={{
@@ -294,7 +294,7 @@ const Profile = () => {
                                                 id="phone"
                                                 label="Телефон"
                                                 name="phone"
-                                                variant="outlined"
+                                                variant="standard"
                                                 value={formik.values.phone}
                                                 onChange={formik.handleChange}
                                                 sx={{
@@ -306,7 +306,7 @@ const Profile = () => {
                                                 id="display_name"
                                                 label="Имя в чате"
                                                 name="display_name"
-                                                variant="outlined"
+                                                variant="standard"
                                                 value={formik.values.display_name}
                                                 onChange={formik.handleChange}
                                                 sx={{
