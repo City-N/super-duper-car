@@ -13,6 +13,7 @@ import NotFoundErrorPage from 'pages/NotFoundError';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import fetchUser, { showUserData } from 'store/slices/GetUserSlice';
 import Header from 'components/Header';
+import Profile from 'pages/Profile';
 
 type TOwnProps = {
     error?: Error;
@@ -34,13 +35,9 @@ export const App = () => {
     const dispatch = useAppDispatch();
     const { data } = useAppSelector(showUserData);
 
-    const redirectoToHomePage = () => history.push('/');
-
     useEffect(() => {
         dispatch(fetchUser()).then(({ payload }) => {
-            if (payload.id) {
-                redirectoToHomePage();
-            } else {
+            if (!payload.id) {
                 history.push('/sign_in');
             }
         });
@@ -56,6 +53,7 @@ export const App = () => {
                 <Route path="/sign_up" component={SignUpPage} />
                 <Route path="/leaders" component={LeaderTablePage} />
                 <Route path="/forum" component={ForumPage} />
+                <Route path="/profile" component={Profile} />
                 <Route exact path="*" component={NotFoundErrorPage} />
             </Switch>
         </ErrorBoundary>

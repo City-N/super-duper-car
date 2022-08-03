@@ -16,13 +16,15 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useFormik } from 'formik';
 import colors from 'colors';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, RouterProps, useHistory } from 'react-router-dom';
 import type { ISignIn } from 'API/AuthApi';
 import { useAppDispatch } from 'hooks/redux';
 import { loginUserAsync } from 'store/slices/GetLoginStatusSlice';
 import fetchUser from 'store/slices/GetUserSlice';
 
 const SignInPage = () => {
+    const history: RouterProps['history'] = useHistory();
+
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const handleClickShowPassword = () => setShowPassword(!showPassword);
     const handleMouseDownPassword = () => setShowPassword(!showPassword);
@@ -40,6 +42,11 @@ const SignInPage = () => {
             .then(() => resetForm())
             .then(() => setSubmitting(false))
             .then(() => dispatch(fetchUser()))
+            .then(({ payload }) => {
+                if (payload.id) {
+                    history.push('/');
+                }
+            })
             .catch(() => setSubmitting(false)),
     });
 
