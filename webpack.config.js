@@ -2,6 +2,8 @@ const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 const isProduction = process.env.NODE_ENV === 'production';
@@ -100,6 +102,32 @@ module.exports = {
             template: './public/index.html',
             favicon: 'src/img/logo_small.svg',
             scriptLoading: 'defer',
+        }),
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: './src/img/favicons',
+                    to: './',
+                },
+                {
+                    from: './src/manifest.json',
+                    to: './manifest.webmanifest',
+                },
+            ],
+        }),
+        new WorkboxPlugin.GenerateSW({
+            exclude: [/\.(?:png|jpg|jpeg|svg)$/],
+            runtimeCaching: [{
+                urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
+                handler: 'CacheFirst',
+                options: {
+                    cacheName: 'images',
+                    expiration: {
+                        maxEntries: 10,
+                    },
+                },
+            }],
+            maximumFileSizeToCacheInBytes: 10485760,
         }),
     ],
     output: {
