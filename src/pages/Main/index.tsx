@@ -17,7 +17,6 @@ const MainPage = () => {
 
     return (
         <Box
-            id="game"
             sx={{
                 height: '100vh',
                 display: 'flex',
@@ -52,6 +51,9 @@ const MainPage = () => {
                                 </Typography>
                                 <Typography variant='body2' component="div" gutterBottom>
                                     Управление на клавиши W и S
+                                </Typography>
+                                <Typography variant='body2' component="div" gutterBottom>
+                                    Войти/выйти из полного экрана клавиша F
                                 </Typography>
                             </Box>
                         )
