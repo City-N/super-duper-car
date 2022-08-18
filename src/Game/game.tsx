@@ -255,7 +255,7 @@ const drawSound = (function () {
             }, 4000);
         }
     };
-})();
+}());
 
 const draw = (
     ctx: CanvasRenderingContext2D,
