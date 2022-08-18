@@ -115,20 +115,20 @@ module.exports = {
                 },
             ],
         }),
-        // new WorkboxPlugin.GenerateSW({
-        //     exclude: [/\.(?:png|jpg|jpeg|svg)$/],
-        //     runtimeCaching: [{
-        //         urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
-        //         handler: 'CacheFirst',
-        //         options: {
-        //             cacheName: 'images',
-        //             expiration: {
-        //                 maxEntries: 10,
-        //             },
-        //         },
-        //     }],
-        //     maximumFileSizeToCacheInBytes: 10485760,
-        // }),
+        new WorkboxPlugin.GenerateSW({
+            exclude: [/\.(?:png|jpg|jpeg|svg)$/],
+            runtimeCaching: [{
+                urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
+                handler: 'CacheFirst',
+                options: {
+                    cacheName: 'images',
+                    expiration: {
+                        maxEntries: 10,
+                    },
+                },
+            }],
+            maximumFileSizeToCacheInBytes: 10485760,
+        }),
     ],
     output: {
         filename: '[name].js',

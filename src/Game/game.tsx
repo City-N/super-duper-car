@@ -15,10 +15,8 @@ import {
 } from './game_constants';
 import generateRandom from './utils/generateRandom';
 
-// eslint-disable-next-line camelcase
-import main_audio from './main_sound.mp3';
-// eslint-disable-next-line camelcase
-import game_over from './car_game-over.mp3';
+import mainAudio from './mainSound.mp3';
+import gameIsOver from './gameOver.mp3';
 
 const posBoomX = 96;
 
@@ -234,8 +232,8 @@ const drawScore = (ctx: CanvasRenderingContext2D, score: number) => {
 
 // eslint-disable-next-line func-names
 const drawSound = (function () {
-    const mainSound = new Audio(main_audio);
-    const gameOver = new Audio(game_over);
+    const mainSound = new Audio(mainAudio);
+    const gameOver = new Audio(gameIsOver);
 
     // eslint-disable-next-line func-names
     return function (isRefrashed: boolean) {
@@ -257,7 +255,7 @@ const drawSound = (function () {
             }, 4000);
         }
     };
-}());
+})();
 
 const draw = (
     ctx: CanvasRenderingContext2D,
