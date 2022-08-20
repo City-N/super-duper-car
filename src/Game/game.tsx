@@ -1,7 +1,5 @@
 /* eslint-disable no-param-reassign */
-import {
-    SetStateAction, Dispatch,
-} from 'react';
+import { SetStateAction, Dispatch } from 'react';
 import throttle from 'lodash.throttle';
 import GameBG from '../img/game_sprites/city/main.png';
 import Hero from '../img/game_sprites/truck/main/body/main.png';
@@ -17,9 +15,12 @@ import {
 } from './game_constants';
 import generateRandom from './utils/generateRandom';
 
+import mainAudio from './mainSound.mp3';
+import gameIsOver from './gameOver.mp3';
+
 const posBoomX = 96;
 
-// let enemyCounter = 0; soon
+let enemyCounter = 0;
 let posX = 244;
 let moveOnBg = 0;
 let moveOn = 0;
@@ -34,9 +35,7 @@ const throttleEnemyMove = throttle(() => {
     moveOnEnemy += posX;
 }, 80);
 
-const drawEnemyFirst = (
-    ctx: CanvasRenderingContext2D,
-) => {
+const drawEnemyFirst = (ctx: CanvasRenderingContext2D) => {
     const imageEnemy = new Image();
     imageEnemy.src = EnemyFirst;
 
@@ -58,7 +57,7 @@ const drawEnemyFirst = (
     throttleEnemyMove();
 
     if (ENEMY_POS.x <= -(imageEnemy.width / 4)) {
-        // enemyCounter += 1; soon
+        enemyCounter += 1;
         ENEMY_POS.x = Math.floor(Math.random() * CANVAS_X_SIZE) + 1000;
         ENEMY_POS.y = generateRandom() ? 260 : 220;
     }
@@ -73,11 +72,7 @@ const throttleBoomEffect = throttle(() => {
     boomOnEffect += posBoomX;
 }, 80);
 
-const drawBoom = (
-    ctx: CanvasRenderingContext2D,
-    X: number,
-    Y: number,
-) => {
+const drawBoom = (ctx: CanvasRenderingContext2D, X: number, Y: number) => {
     const imageBoom = new Image();
     imageBoom.src = BoomEffect;
 
@@ -111,9 +106,7 @@ let intervalId = setInterval(() => {
     BG_POS.dx += 1;
 }, 5000);
 
-const drawHero = (
-    ctx: CanvasRenderingContext2D,
-) => {
+const drawHero = (ctx: CanvasRenderingContext2D) => {
     const imagHero = new Image();
     imagHero.src = Hero;
 
@@ -155,7 +148,7 @@ const drawHero = (
         throttleHeroMove();
     }
 
-    const frontHeroPosX = (imagHero.width / 6) - HERO_POS.x;
+    const frontHeroPosX = imagHero.width / 6 - HERO_POS.x;
     const isPosXHit = frontHeroPosX >= ENEMY_POS.x;
 
     if (isPosXHit && HERO_POS.y === ENEMY_POS.y) {
@@ -173,9 +166,7 @@ const drawHero = (
     }
 };
 
-const drawBG = (
-    ctx: CanvasRenderingContext2D,
-) => {
+const drawBG = (ctx: CanvasRenderingContext2D) => {
     const imgCity = new Image();
     imgCity.src = GameBG;
 
@@ -233,6 +224,39 @@ document.addEventListener('keyup', (e: KeyboardEvent) => {
     }
 });
 
+const drawScore = (ctx: CanvasRenderingContext2D, score: number) => {
+    ctx.font = '18px Arial';
+    ctx.fillStyle = '#d9dade';
+    ctx.fillText(`Машинок пройдено: ${score}`, 20, 20);
+};
+
+// eslint-disable-next-line func-names
+const drawSound = (function () {
+    const mainSound = new Audio(mainAudio);
+    const gameOver = new Audio(gameIsOver);
+
+    // eslint-disable-next-line func-names
+    return function (isRefrashed: boolean) {
+        if (moveOn !== 0) {
+            mainSound.play();
+        }
+        if (isRefrashed) {
+            mainSound.pause();
+            mainSound.currentTime = 0;
+            mainSound.play();
+        }
+        if (isCrashed) {
+            mainSound.pause();
+            mainSound.currentTime = 0;
+            gameOver.play();
+            setTimeout(() => {
+                gameOver.pause();
+                gameOver.currentTime = 0;
+            }, 4000);
+        }
+    };
+}());
+
 const draw = (
     ctx: CanvasRenderingContext2D,
     isRefrashed: boolean,
@@ -242,7 +266,7 @@ const draw = (
     if (isRefrashed) {
         setRefrashed(!isRefrashed);
         isCrashed = false;
-        // enemyCounter = 0; soon
+        enemyCounter = 0;
         posX = 244;
         ENEMY_POS.dx = 2;
         ENEMY_POS.x = CANVAS_X_SIZE + 20;
@@ -265,6 +289,8 @@ const draw = (
 
     drawBG(ctx);
     drawHero(ctx);
+    drawScore(ctx, enemyCounter);
+    drawSound(isRefrashed);
 };
 
 export default draw;
